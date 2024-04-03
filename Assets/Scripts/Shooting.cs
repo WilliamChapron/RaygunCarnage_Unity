@@ -4,38 +4,28 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public GameObject projectilePrefab; // Prefab du projectile à tirer
-    public Transform firePoint; // Point de départ du tir
-    public float projectileSpeed = 10f; // Vitesse du projectile
+    public GameObject projectilePrefab; 
+    public Transform playerTransform; 
+    public float projectileSpeed = 30f; 
 
     // Update is called once per frame
     void Update()
     {
-        // Si la touche de tir est enfoncée (par exemple, la touche gauche de la souris)
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot(); // Appeler la fonction de tir
+            Shoot(); 
         }
     }
 
     void Shoot()
     {
-        // Instancier le projectile à partir du prefab au point de départ du tir
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 
-        // Obtenir le Rigidbody du projectile
+        GameObject projectile = Instantiate(projectilePrefab, playerTransform.position + new Vector3(0.5f, 2.0f, 0.5f), playerTransform.rotation * Quaternion.Euler(90f, 0f, 0f));
+
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
 
-        // Vérifier si le Rigidbody existe
-        if (rb != null)
-        {
-            // Appliquer une vélocité au projectile dans la direction du firePoint
-            rb.velocity = firePoint.forward * projectileSpeed;
-        }
-        else
-        {
-            Debug.LogWarning("Le prefab du projectile ne contient pas de composant Rigidbody.");
-        }
+        rb.velocity = playerTransform.forward * projectileSpeed;
+
     }
 }
 
