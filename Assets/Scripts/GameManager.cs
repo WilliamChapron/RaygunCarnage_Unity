@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PauseGame();
+        //PauseGame();
 
-        roundSystem.StartRounds();
+        //roundSystem.StartRounds();
     }
 
     void Update()
@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
         //    // Mise en pause de l'exécution des composants si aucun round n'est en cours
         //    PauseGame();
         //}
-        Debug.Log("ROUND ROUND");
-        PauseGame();
+        //Debug.Log("ROUND ROUND");
+        //PauseGame();
     }
 
     void PauseGame()
