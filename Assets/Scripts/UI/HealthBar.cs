@@ -23,7 +23,7 @@ public class HealthBar : MonoBehaviour
     public void SetMaxHealth(int value)
     {
         slider.value = value;
-        Debug.Log("Health bar assigned: ");
+        //Debug.Log("Health bar assigned: ");
     }
     public void SetHealth(int value)
     {

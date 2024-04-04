@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private float _lastInputTime;
     public List<KeyCode> _movementKeys;
 
+    public Shooting shootingComponent;
+
     // Constructeur pour accepter les paramètres personnalisés
     public void Initialize(List<KeyCode> movementKeys)
     {
@@ -49,7 +51,6 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * _moveSpeed * Time.deltaTime;
         transform.Translate(movement);
     }
-
     public void Update()
     {
         if (Input.GetKey(_movementKeys[0]) || Input.GetKey(_movementKeys[1]) || Input.GetKey(_movementKeys[2]) || Input.GetKey(_movementKeys[3]))
@@ -63,6 +64,13 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isRunning", true);
             _isRunning = true;
             animator.CrossFade("Running", 0f);
+
+            // He moves, he can shoot, otherwise no
+            shootingComponent.canShoot = true;
+        }
+        else
+        {
+            shootingComponent.canShoot = false;
         }
 
         // Check for ComeBack Idle
