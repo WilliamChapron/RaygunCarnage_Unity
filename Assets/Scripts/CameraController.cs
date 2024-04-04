@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float _moveSpeed = 5f;
-
     void Start()
     {
         Cursor.visible = true;

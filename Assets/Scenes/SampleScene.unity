@@ -267,6 +267,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 887747596}
+    - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 887747597}
   m_SourcePrefab: {fileID: 100100000, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
 --- !u!1 &129012483
 GameObject:
@@ -730,6 +734,9 @@ MonoBehaviour:
   playerTransform: {fileID: 675214201}
   canShoot: 0
   projectileSpeed: 30
+  _maxLaserRange: 100
+  laserWidth: 0.1
+  laserMaterial: {fileID: 2100000, guid: e4d1f979f9849014089cc5a871ab62ea, type: 2}
 --- !u!65 &675214207
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -749,8 +756,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.9561079, z: 1}
+  m_Center: {x: 0, y: 0.87023413, z: 0}
 --- !u!54 &675214208
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -778,6 +785,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &675214209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675214197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e043fdad51acb5b4e99aa157a0797540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +874,9 @@ MonoBehaviour:
   playerTransform: {fileID: 887747589}
   canShoot: 0
   projectileSpeed: 30
+  _maxLaserRange: 100
+  laserWidth: 0.1
+  laserMaterial: {fileID: 2100000, guid: e4d1f979f9849014089cc5a871ab62ea, type: 2}
 --- !u!65 &887747595
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -901,8 +923,20 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &887747597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887747585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e043fdad51acb5b4e99aa157a0797540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &965622745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1263,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 675214208}
+    - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 675214209}
   m_SourcePrefab: {fileID: 100100000, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
 --- !u!1 &2128606252
 GameObject:
@@ -1276,6 +1314,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 1787100142461640845, guid: 705f923fb95425847b85299e66c639ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985889367436869039, guid: 705f923fb95425847b85299e66c639ac,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 8109600593330439505, guid: 705f923fb95425847b85299e66c639ac,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -14,6 +14,7 @@ public class Shooting : MonoBehaviour
     public Material laserMaterial; 
     private LineRenderer lineRenderer;
 
+
     void Start()
     {
         lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -46,6 +47,8 @@ public class Shooting : MonoBehaviour
 
     //}
 
+
+
     void FireLaser()
     {
         RaycastHit hit;
@@ -63,15 +66,22 @@ public class Shooting : MonoBehaviour
 
                 ColliderComponent colliderComponent = gameObject.GetComponent<ColliderComponent>();
 
-                if (colliderComponent != null)
-                {
-                    colliderComponent.OnCollisionEnter(collider);
-                }
+                colliderComponent.OnLaserCollision();
+
+                //Collision collision = new Collision
+                //{
+                //    collider = colliderComponent
+                //};
+
+                //if (colliderComponent != null)
+                //{
+                //    colliderComponent.OnCollisionEnter(new Collision(collider));
+                //}
             }
         }
         else
         {
-            endPoint = transform.position + transform.forward * _maxLaserRange;
+            endPoint = startPoint + transform.forward * _maxLaserRange;
         }
 
         lineRenderer.SetPosition(0, startPoint);
