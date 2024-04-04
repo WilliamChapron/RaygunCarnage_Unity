@@ -17,7 +17,9 @@ public class HealthBar : MonoBehaviour
 
     public void PosUpdate()
     {
-        transform.LookAt(Camera.main.transform);
+        Debug.Log(gameObject.name);
+        //transform.LookAt(Camera.main.transform);
+        //Debug.Log(Camera.m);
     }
 
     public void SetMaxHealth(int value)

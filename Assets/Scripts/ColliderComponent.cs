@@ -32,8 +32,11 @@ public class ColliderComponent : MonoBehaviour
 
     //}
 
-    public void OnLaserCollision()
+    public void OnLaserCollision(Collider collider)
     {
+        //collider.gameObject.SetActive(false);
+        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
+        healthComponent.TakeDamage(20);
         Debug.Log("Le laser a touché cet objet !");
     }
 

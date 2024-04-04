@@ -66,7 +66,7 @@ public class Shooting : MonoBehaviour
 
                 ColliderComponent colliderComponent = gameObject.GetComponent<ColliderComponent>();
 
-                colliderComponent.OnLaserCollision();
+                colliderComponent.OnLaserCollision(hit.collider);
 
                 //Collision collision = new Collision
                 //{

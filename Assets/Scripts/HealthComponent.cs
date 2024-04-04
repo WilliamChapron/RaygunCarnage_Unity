@@ -30,6 +30,7 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(int value)
     {
         _currentHealth -= value;
+        _healthBar.SetHealth(_currentHealth);
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
