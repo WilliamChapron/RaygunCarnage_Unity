@@ -24,7 +24,6 @@ public class HealthComponent : MonoBehaviour
 
     void Update()
     {
-        _healthBar.PosUpdate();
     }
 
     public void TakeDamage(int value)
