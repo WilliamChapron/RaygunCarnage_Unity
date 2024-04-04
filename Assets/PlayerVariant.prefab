@@ -366,7 +366,7 @@ PrefabInstance:
     - target: {fileID: 2858590657992640146, guid: ebc4580c7ed532b4cb07171aed640d52,
         type: 3}
       propertyPath: m_Name
-      value: Player Variant
+      value: PlayerVariant
       objectReference: {fileID: 0}
     - target: {fileID: 3233603921231911976, guid: ebc4580c7ed532b4cb07171aed640d52,
         type: 3}
@@ -499,4 +499,3 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 0
   _healthBar: {fileID: 2878502944307792880}
-  _playerTransform: {fileID: 7218134640927616878}
