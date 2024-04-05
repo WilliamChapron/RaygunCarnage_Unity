@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - EntityEmpty
+  - PlayerControllable
   layers:
   - Default
   - TransparentFX
