@@ -211,9 +211,14 @@ public class CameraController : MonoBehaviour
 
         float distance = Vector3.Distance(farthestPlayerPositions[0], farthestPlayerPositions[1]);
         float newFOV = distance * 1f; // Inverse de la distance
-        Debug.Log(" Fov " + newFOV);
-        GetComponent<Camera>().fieldOfView = newFOV;
-        Debug.Log("ddd");
+
+        if (newFOV > 8)
+        {
+            Debug.Log(" Fov " + newFOV);
+            GetComponent<Camera>().fieldOfView = newFOV;
+            Debug.Log("ddd");
+        }
+
 
 
         foreach (Vector3 pos in positionsList)
