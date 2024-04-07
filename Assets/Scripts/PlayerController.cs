@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     private bool _isRunning = false;
-    public float _moveSpeed = 5f;
+    public static float _moveSpeed = 5f;
     public float _rotationSpeed = 600f;
     private float _lastInputTime;
     public List<KeyCode> _movementKeys;
