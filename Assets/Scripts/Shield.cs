@@ -4,53 +4,44 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-
-    [SerializeField] string[] _collisionTag;
-    float hitTime;
-    Material mat;
+    public GameObject ShieldPrefab;
+    public Transform playerTransform;
+    private GameObject shieldInstance;
+    private float shieldCreationTime;
+    public bool haveShield;
+    public float chargingTime;
 
     void Start()
     {
-        Debug.Log("Shield assign");
-        if (GetComponent<Renderer>())
-        {
-            mat = GetComponent<Renderer>().sharedMaterial;
-        }
-
+        haveShield = true;
     }
 
     void Update()
     {
-
-        if (hitTime > 0)
+        if (shieldInstance != null && NoMoreShield(1f))
         {
-            float myTime = Time.fixedDeltaTime * 1000;
-            hitTime -= myTime;
-            if (hitTime < 0)
-            {
-                hitTime = 0;
-            }
-            mat.SetFloat("_HitTime", hitTime);
+            haveShield = false;
+            DestroyShield();
         }
-
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void CreateShield()
     {
-        for (int i = 0; i < _collisionTag.Length; i++)
-        {
-
-            if (_collisionTag.Length > 0 || collision.transform.CompareTag(_collisionTag[i]))
-            {
-                //Debug.Log("hit");
-                ContactPoint[] _contacts = collision.contacts;
-                for (int i2 = 0; i2 < _contacts.Length; i2++)
-                {
-                    mat.SetVector("_HitPosition", transform.InverseTransformPoint(_contacts[i2].point));
-                    hitTime = 500;
-                    mat.SetFloat("_HitTime", hitTime);
-                }
-            }
-        }
+        shieldInstance = Instantiate(ShieldPrefab, playerTransform.position + new Vector3(0.0f, playerTransform.position.y + 1f), Quaternion.identity);
+        shieldCreationTime = Time.time;
+        haveShield = true;
     }
+
+    private bool NoMoreShield(float time)
+    {
+        return Time.time - shieldCreationTime >= time;
+    }
+
+    private void DestroyShield()
+    {
+        Destroy(shieldInstance);
+        shieldInstance = null;
+    }
+
+    
 }
