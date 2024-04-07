@@ -2,21 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class Player2Controller : MonoBehaviour
 {
-
     public float speed = 5.0f;
-
     Animator animator;
-
     int isRunningHash;
-    //#TODO animation pour le dash =
-    //int isDashingHash; 
-
     PlayerInput input;
-
     Vector2 currentMovement;
-    bool movementPressed;
+    Vector2 currentAim;
 
     void Awake()
     {
@@ -25,34 +19,33 @@ public class Player2Controller : MonoBehaviour
         input.CharacterControls.Movement.performed += ctx =>
         {
             currentMovement = ctx.ReadValue<Vector2>();
-            movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
         };
 
-        //#TODO pour le dash 
-        //input.CharacterControls.Movement.performed += ctx => currentMovement = ctx.ReadValueAsButton();
+        input.CharacterControls.Aim.performed += ctx =>
+        {
+            currentAim = ctx.ReadValue<Vector2>();
+        };
     }
 
     void Start()
     {
         animator = GetComponent<Animator>();
-
         isRunningHash = Animator.StringToHash("isRunning");
     }
 
     void RotateControl()
     {
-        Vector3 currentPosition = transform.position;
-
-        Vector3 newPosition = new Vector3(currentMovement.x, 0, currentMovement.y);
-
-        Vector3 positionToLookAt = currentPosition + newPosition;
-
-        transform.LookAt(positionToLookAt);
+        if (currentAim != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(currentAim.x, currentAim.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, angle, 0);
+        }
     }
 
     void MovementControl()
     {
         bool isRunning = animator.GetBool(isRunningHash);
+        bool movementPressed = currentMovement.magnitude > 0.1f;
 
         if (movementPressed && !isRunning)
         {
@@ -68,21 +61,19 @@ public class Player2Controller : MonoBehaviour
         transform.Translate(movementDirection * Time.deltaTime * speed, Space.World);
     }
 
-
-    public void Update()
+    void Update()
     {
         MovementControl();
         RotateControl();
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         input.CharacterControls.Enable();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         input.CharacterControls.Disable();
     }
-
 }

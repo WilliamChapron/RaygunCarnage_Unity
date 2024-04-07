@@ -666,7 +666,7 @@ PrefabInstance:
     - target: {fileID: 7218134640927616878, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.9402976
+      value: -1.21
       objectReference: {fileID: 0}
     - target: {fileID: 7218134640927616878, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
@@ -676,7 +676,7 @@ PrefabInstance:
     - target: {fileID: 7218134640927616878, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.8952162
+      value: 1.49
       objectReference: {fileID: 0}
     - target: {fileID: 7218134640927616878, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
@@ -730,14 +730,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
-    - {fileID: 3265950753220538244, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
-      insertIndex: -1
+      insertIndex: 2
       addedObject: {fileID: 915581629}
+    - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 915581632}
+    - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 915581633}
   m_SourcePrefab: {fileID: 100100000, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
 --- !u!1 &915581628 stripped
 GameObject:
@@ -757,6 +764,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513a39eae183ab345ad9915f57adfcc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+--- !u!4 &915581631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7218134640927616878, guid: 4818e406df2a7794781ca96f08ae0c9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 915581627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &915581632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915581628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a4e26bbde2738c9449efd7635a4f1612,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bad7000f-db30-4b3f-9880-38b05c584e11
+    m_ActionName: CharacterControls/Movement
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a69a0b4-144f-4133-962a-26d39c12dc10
+    m_ActionName: CharacterControls/Dash
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0539bdec-eb64-4b9f-9364-cda3611a89a7
+    m_ActionName: CharacterControls/Aim[/DualShock4GamepadHID/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2277ea59-f070-4c59-938d-8204c8f37548
+    m_ActionName: CharacterControls/Shield[/DualShock4GamepadHID/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2dcc83f4-baf9-4632-a08b-21e86bd5de47
+    m_ActionName: CharacterControls/Shoot[/DualShock4GamepadHID/rightTrigger]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: CharacterControls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &915581633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915581628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c9497110dd23d4eb98fc961b7362ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1229761420}
+  playerTransform: {fileID: 915581631}
+  projectileSpeed: 30
 --- !u!1 &1173451649
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1191648056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,7 +1188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2128606253
 Transform:
   m_ObjectHideFlags: 0
