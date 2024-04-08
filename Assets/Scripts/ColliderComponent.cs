@@ -4,33 +4,20 @@ using UnityEngine;
 
 public class ColliderComponent : MonoBehaviour
 {
-    // Start is called before the first frame update
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        //GameObject otherObject = collision.gameObject;
+        //Debug.Log(gameObject.tag + ", " + otherObject.tag);
+        ////if (otherObject != null && otherObject.CompareTag("Player"))
+        ////{
+        ////    if (gameObject != null)
+        ////    {
+        ////        Destroy(gameObject);
+        ////    }
+        ////}
 
-    //void Start()
-    //{
-
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
-
-    //public void OnCollisionEnter(Collision collision)
-    //{
-    //    GameObject otherObject = collision.gameObject;
-    //    Debug.Log(gameObject.tag + ", " + otherObject.tag);
-    //    //if (otherObject != null && otherObject.CompareTag("Player"))
-    //    //{
-    //    //    if (gameObject != null)
-    //    //    {
-    //    //        Destroy(gameObject);
-    //    //    }
-    //    //}
-
-    //}
+    }
 
     public void OnLaserCollision(Collider collider)
     {
@@ -46,15 +33,15 @@ public class ColliderComponent : MonoBehaviour
 
 
 
-    //public void OnCollisionStay(Collision collision)
-    //{
+    public void OnCollisionStay(Collision collision)
+    {
 
-    //}
+    }
 
-    //public void OnCollisionExit(Collision collision)
-    //{
+    public void OnCollisionExit(Collision collision)
+    {
 
-    //}
+    }
 
 
 

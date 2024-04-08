@@ -21,24 +21,6 @@ public class CameraController : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 
-    //public struct PositionInfo
-    //{
-    //    public float x;
-    //    public float y;
-    //    public float z;
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    // Controls WASD
-    //    float horizontalInput = Input.GetAxisRaw("Horizontal");
-    //    float verticalInput = Input.GetAxisRaw("Vertical");
-
-    //    Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * _moveSpeed * Time.deltaTime;
-    //    transform.Translate(movement);
-    //}
-
     public Transform target;
 
     void Update()
@@ -203,7 +185,7 @@ public class CameraController : MonoBehaviour
         //    GetComponent<Camera>().fieldOfView = newFOV;
         //    Debug.Log("ddd");
         //}
-        Debug.Log(" Fov " + newFOV);
+        //Debug.Log(" Fov " + newFOV);
         foreach (Vector3 pos in positionsList)
         {
             averageLookAt += pos;
@@ -212,53 +194,31 @@ public class CameraController : MonoBehaviour
 
         //transform.LookAt(averageLookAt, Vector3.up);
         float newYPosition;
-        if (newFOV > 25.0f && newFOV < 140.0f)
+        if (newFOV > 25.0f)
         {
             newYPosition = newFOV;
             Vector3 cameraPosition = new Vector3(averageLookAt.x - 20.0f, newYPosition, averageLookAt.z); ;
             transform.position = cameraPosition;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
 
-            GameObject lightObject = new GameObject("BrightLight");
-            Light lightComponent = lightObject.AddComponent<Light>();
-            lightComponent.color = Color.red;
-            lightComponent.intensity = 50f;
+        //    GameObject lightObject = new GameObject("BrightLight");
+        //    Light lightComponent = lightObject.AddComponent<Light>();
+        //    lightComponent.color = Color.red;
+        //    lightComponent.intensity = 50f;
 
-            // Définir la position de la lumière
-            lightObject.transform.position = new Vector3(farthestPlayerPositions[0].x, farthestPlayerPositions[0].y, farthestPlayerPositions[0].z);
+        //    // Définir la position de la lumière
+        //    lightObject.transform.position = new Vector3(farthestPlayerPositions[0].x, farthestPlayerPositions[0].y, farthestPlayerPositions[0].z);
 
-            GameObject lightObject2 = new GameObject("BrightLight2");
-            Light lightComponent2 = lightObject2.AddComponent<Light>();
-            lightComponent2.color = Color.blue;
-            lightComponent2.intensity = 50f;
+        //    GameObject lightObject2 = new GameObject("BrightLight2");
+        //    Light lightComponent2 = lightObject2.AddComponent<Light>();
+        //    lightComponent2.color = Color.blue;
+        //    lightComponent2.intensity = 50f;
 
-            // Définir la position de la lumière
-            lightObject.transform.position = averageLookAt;
-        }
-
-
-
-
-        //GetComponent<Camera>().fieldOfView -= _zoomSpeed * Time.deltaTime;
-
-        //float horizontalInput = Input.GetAxisRaw("Horizontal");
-        //float verticalInput = Input.GetAxisRaw("Vertical");
-
-        //Vector3 movement = new Vector3(0f, 0f, verticalInput) * _moveSpeed * Time.deltaTime;
-        //transform.position = average;
+        //    // Définir la position de la lumière
+        //    lightObject.transform.position = averageLookAt;
+        //}
     }
-
-
-
-
-    //public float rotationSpeed = 6.0f; // Vitesse de rotation de la cam�ra
-
-    //void Update()
-    //{
-    //    // Rotation autour du point cible
-    //    transform.RotateAround(new Vector3(0.0f, 0.0f, 0.0f), Vector3.up, rotationSpeed * Time.deltaTime);
-    //}
 }

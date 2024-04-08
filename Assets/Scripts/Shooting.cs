@@ -36,17 +36,6 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    //void Shoot()
-    //{
-
-    //    GameObject projectile = Instantiate(projectilePrefab, playerTransform.position + new Vector3(0.0f, 1.0f, 1.5f), playerTransform.rotation * Quaternion.Euler(90f, 0f, 0f));
-    //    projectile.SetActive(true);
-    //    Rigidbody rb = projectile.GetComponent<Rigidbody>();
-
-    //    rb.velocity = playerTransform.forward * projectileSpeed;
-
-    //}
-
 
 
     void FireLaser()
@@ -63,20 +52,8 @@ public class Shooting : MonoBehaviour
             if (collider != null)
             {
                 Debug.Log("Objet touché : " + collider.gameObject.name);
-
                 ColliderComponent colliderComponent = gameObject.GetComponent<ColliderComponent>();
-
                 colliderComponent.OnLaserCollision(hit.collider);
-
-                //Collision collision = new Collision
-                //{
-                //    collider = colliderComponent
-                //};
-
-                //if (colliderComponent != null)
-                //{
-                //    colliderComponent.OnCollisionEnter(new Collision(collider));
-                //}
             }
         }
         else
