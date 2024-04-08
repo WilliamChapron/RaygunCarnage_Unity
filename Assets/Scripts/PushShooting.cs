@@ -69,7 +69,7 @@ public class ShootingExplosion : ShootingPower
         GameObject particleObject = Instantiate(particlePrefab, endPoint, Quaternion.identity);
         ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
 
-
+        //SphereExplode
 
         if (particleSystem != null)
         {

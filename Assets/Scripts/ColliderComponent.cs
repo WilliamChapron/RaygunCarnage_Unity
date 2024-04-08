@@ -7,16 +7,15 @@ public class ColliderComponent : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        //GameObject otherObject = collision.gameObject;
-        //Debug.Log(gameObject.tag + ", " + otherObject.tag);
-        ////if (otherObject != null && otherObject.CompareTag("Player"))
-        ////{
-        ////    if (gameObject != null)
-        ////    {
-        ////        Destroy(gameObject);
-        ////    }
-        ////}
-
+        if (collision.collider.tag == "PlayerControllable")
+        {
+            Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+                rb.useGravity = false;
+            }
+        }
     }
 
   
