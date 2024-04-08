@@ -797,6 +797,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e043fdad51acb5b4e99aa157a0797540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &675214213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675214197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b7d5938d68a574e98ab445e358c8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashSpeed: 3
+  DashTravelTime: 0.3
+  DashCooldownTime: 2
+  tr: {fileID: 1350640971}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,7 +1313,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
   m_ApplyActiveColorSpace: 1
 --- !u!1001 &2121320051
 PrefabInstance:
@@ -1416,6 +1432,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 675214209}
+    - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 675214213}
   m_SourcePrefab: {fileID: 100100000, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
 --- !u!1 &2128606252
 GameObject:
