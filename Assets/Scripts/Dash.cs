@@ -43,7 +43,7 @@ public class Dash : MonoBehaviour
 
     public void ToDash()
     {
-        PlayerController._moveSpeed *= DashSpeed;
+        //PlayerController._moveSpeed *= DashSpeed;
     }
 
     private IEnumerator DashCooldown()
@@ -52,7 +52,7 @@ public class Dash : MonoBehaviour
         isDashing = true;
         tr.emitting = true;
         yield return new WaitForSeconds(DashTravelTime);
-        PlayerController._moveSpeed /= DashSpeed;
+        //PlayerController._moveSpeed /= DashSpeed;
         isDashing = false;
         tr.emitting = false;
         yield return new WaitForSeconds(DashCooldownTime);
