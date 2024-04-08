@@ -57,7 +57,5 @@ public class Dash : MonoBehaviour
         tr.emitting = false;
         yield return new WaitForSeconds(DashCooldownTime);
         CanDash = true;
-    }
-
-    
+    }  
 }
