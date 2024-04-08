@@ -74,7 +74,7 @@ public class ShootingExplosion : ShootingPower
         if (particleSystem != null)
         {
             particleSystem.Play();
-            Debug.Log("Play particule");
+            //Debug.Log("Play particule");
         }
         else
         {
