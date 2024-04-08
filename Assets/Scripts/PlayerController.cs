@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         animator.Play("Idle", 0, 0f);
+
     }
 
     private void PerformComeBackIdle()
