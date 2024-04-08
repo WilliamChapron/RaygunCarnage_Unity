@@ -8,7 +8,7 @@ public class Shooting : MonoBehaviour
     public bool canShoot;
     public float projectileSpeed = 30f;
 
-    public float _maxLaserRange = 100f;
+    public float _maxLaserRange = 50f;
     public float laserWidth = 0.1f;
     public Material laserMaterial;
     protected LineRenderer lineRenderer;
@@ -27,8 +27,11 @@ public class Shooting : MonoBehaviour
         // Shooting Components
         shootingPowers = new List<ShootingPower>();
 
-        ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>(transform);
-        shootingPowers.Add(pushShooting);
+        //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
+        //shootingPowers.Add(pushShooting);
+
+        ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
+        shootingPowers.Add(explosionShooting);
     }
 
     protected virtual void Update()
@@ -70,6 +73,13 @@ public class Shooting : MonoBehaviour
         lineRenderer.enabled = true;
 
         Invoke("DisableLaser", 0.1f);
+
+        if (shootingPowers[0].GetType() == typeof(ShootingExplosion))
+        {
+            ShootingExplosion explosionPower = (ShootingExplosion)shootingPowers[0];
+            explosionPower.PerformExplosion(endPoint);
+        }
+        
     }
 
     protected void DisableLaser()

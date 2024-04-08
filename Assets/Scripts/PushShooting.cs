@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,13 +6,6 @@ using UnityEngine;
 
 public class ShootingPower : MonoBehaviour
 {
-    protected Transform playerTransform;
-
-    public ShootingPower(Transform transform)
-    {
-        playerTransform = transform;
-        Debug.Log("Transform?" + playerTransform.gameObject.name);
-    }
 
     public virtual void OnCollision(Collider collider)
     {
@@ -22,10 +16,6 @@ public class ShootingPower : MonoBehaviour
 
 public class ShootingPush : ShootingPower
 {
-    public ShootingPush(Transform transform) : base(transform)
-    {
-
-    }
 
     public override void OnCollision(Collider collider)
     {
@@ -52,13 +42,53 @@ public class ShootingPush : ShootingPower
 
         float forceMagnitudePerIteration = totalForceMagnitude / numIterations;
 
-        Vector3 forceDirection = (targetPosition - playerTransform.position).normalized;
+        Vector3 forceDirection = (targetPosition - transform.position).normalized;
 
         for (int i = 0; i < numIterations; i++)
         {
             Debug.Log("Apply force");
             rb.AddForce(forceDirection * forceMagnitudePerIteration, ForceMode.Force);
             yield return new WaitForSeconds(duration / numIterations);
+        }
+    }
+}
+
+public class ShootingExplosion : ShootingPower
+{
+
+    GameObject particlePrefab;
+    public void Start()
+    {
+        particlePrefab = Resources.Load<GameObject>("Hit_02");
+    }
+
+    public void PerformExplosion(Vector3 endPoint)
+    {
+        Debug.Log(particlePrefab.name);
+
+        GameObject particleObject = Instantiate(particlePrefab, endPoint, Quaternion.identity);
+        ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
+
+
+
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+            Debug.Log("Play particule");
+        }
+        else
+        {
+            Debug.LogError("Le GameObject instancié ne contient pas de composant Particle System !");
+        }
+    }
+
+    public override void OnCollision(Collider collider)
+    {
+
+        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
+        if (healthComponent != null)
+        {
+            healthComponent.TakeDamage(20);
         }
     }
 }
