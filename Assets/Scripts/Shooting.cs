@@ -12,6 +12,9 @@ public class Shooting : MonoBehaviour
     public Material laserMaterial;
     protected LineRenderer lineRenderer;
 
+    public float timeBetweenShots = 0.5f; // In seconds
+    private float timeSinceLastShot;
+
     public List<ShootingPower> shootingPowers;
 
     protected virtual void Start()
@@ -35,12 +38,12 @@ public class Shooting : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        timeSinceLastShot += Time.deltaTime;
+
+        if (Input.GetButtonDown("Fire1") && canShoot && timeSinceLastShot >= timeBetweenShots)
         {
-            if (canShoot)
-            {
-                FireLaser();
-            }
+            timeSinceLastShot = 0f;
+            FireLaser();
         }
     }
 

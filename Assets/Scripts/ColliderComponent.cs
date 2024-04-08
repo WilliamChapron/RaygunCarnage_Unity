@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class ColliderComponent : MonoBehaviour
 {
+    private Rigidbody rb;
+    private bool hasCollided = false;
 
-    public void OnCollisionEnter(Collision collision)
+    
+
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.tag == "PlayerControllable")
+
+        if (other.CompareTag("EntityEmpty"))
         {
-            Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                rb.useGravity = false;
-            }
+            Debug.Log(name + " a une Collision avec : " + other.gameObject.name);
+            //HealthComponent healthComponent = collision.collider.gameObject.GetComponent<HealthComponent>();
+            //if (healthComponent != null)
+            //{
+            //    healthComponent.TakeDamage(20);
+            //}
         }
     }
 
-  
+
 
 
 
@@ -27,10 +32,6 @@ public class ColliderComponent : MonoBehaviour
 
     }
 
-    public void OnCollisionExit(Collision collision)
-    {
-
-    }
 
 
 
