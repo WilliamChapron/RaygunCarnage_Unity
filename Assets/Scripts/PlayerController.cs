@@ -57,7 +57,10 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Running:
                 Movement();
                 animator.CrossFade("Running", 0f);
-                PerformComeBackIdle();
+                if (!Input.GetKey(_movementKeys[0]) && !Input.GetKey(_movementKeys[1]) && !Input.GetKey(_movementKeys[2]) && !Input.GetKey(_movementKeys[3]))
+                {
+                    SetPlayerState(PlayerState.Idle);
+                }
                 break;
             case PlayerState.Shield:
                 animator.CrossFade("Shield", 0f);
@@ -116,14 +119,6 @@ public class PlayerController : MonoBehaviour
             _powerState1 = PowerState.CanBeUse;
             powercurrentTime = 0.0f;
         } 
-    }
-
-    private void PerformComeBackIdle()
-    {
-        if (Time.time - _lastInputTime > 1f)
-        {
-            SetPlayerState(PlayerState.Idle);
-        }
     }
 
     private void RotateControl()

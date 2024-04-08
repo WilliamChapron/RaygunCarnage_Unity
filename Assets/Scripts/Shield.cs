@@ -28,6 +28,7 @@ public class Shield : MonoBehaviour
     public void CreateShield()
     {
         shieldInstance = Instantiate(ShieldPrefab, playerTransform.position + new Vector3(0.0f, playerTransform.position.y + 1f), Quaternion.identity);
+        shieldInstance.SetActive(true);
         shieldCreationTime = Time.time;
         haveShield = true;
     }
