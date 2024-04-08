@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlayerController;
 
-public class Shield : Power 
+public class Shield : Power
 {
     public GameObject ShieldPrefab;
     public Transform playerTransform;
@@ -42,7 +41,4 @@ public class Shield : Power
         Destroy(shieldInstance);
         shieldInstance = null;
     }
-
-    
-
 }

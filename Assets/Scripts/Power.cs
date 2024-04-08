@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static PlayerController;
-using static Power;
 
 public class Power : MonoBehaviour
 {
@@ -11,8 +9,9 @@ public class Power : MonoBehaviour
     private float powercurrentTime;
     private float startTime;
     public bool havePower;
-    public float chargingTime;
+    public float TimeToCharge;
     public float powerCreationTime;
+
     public enum PowerState
     {
         CanBeUse,
@@ -70,10 +69,10 @@ public class Power : MonoBehaviour
 
     private void ChargePower()
     {
-        if (powercurrentTime < chargingTime)
+        if (powercurrentTime < TimeToCharge)
         {
             powercurrentTime = Time.time - startTime;
-            slider.value = (powercurrentTime * 100f / chargingTime) / 100f;
+            slider.value = (powercurrentTime * 100f / TimeToCharge) / 100f;
         }
         else
         {

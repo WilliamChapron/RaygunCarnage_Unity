@@ -144,7 +144,7 @@ PrefabInstance:
     - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
       propertyPath: _movementKeys.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
@@ -170,6 +170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _movementKeys.Array.data[4]
       value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      propertyPath: _movementKeys.Array.data[5]
+      value: 304
       objectReference: {fileID: 0}
     - target: {fileID: 3265950753220538244, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
@@ -262,6 +267,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 887747595}
+    - targetCorrespondingSourceObject: {fileID: 8025458082511254996, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 887747596}
   m_SourcePrefab: {fileID: 100100000, guid: 4818e406df2a7794781ca96f08ae0c9c, type: 3}
 --- !u!1 &129012483
 GameObject:
@@ -696,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4be1965276a374b8138419f108c6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 5
 --- !u!1 &379335401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1063,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 1229761420}
   playerTransform: {fileID: 675214201}
+  canShoot: 0
   projectileSpeed: 30
+  _maxLaserRange: 100
+  laserWidth: 0.1
+  laserMaterial: {fileID: 0}
 --- !u!136 &675214203
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1336,7 +1350,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 1229761420}
   playerTransform: {fileID: 887747589}
+  canShoot: 0
   projectileSpeed: 30
+  _maxLaserRange: 100
+  laserWidth: 0.1
+  laserMaterial: {fileID: 0}
 --- !u!136 &887747591
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1379,6 +1397,22 @@ MonoBehaviour:
   _powerState: 0
   ShieldPrefab: {fileID: 954926499}
   playerTransform: {fileID: 887747589}
+--- !u!114 &887747596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887747585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b7d5938d68a574e98ab445e358c8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashSpeed: 3
+  DashTravelTime: 0.3
+  DashCooldownTime: 2
+  tr: {fileID: 0}
 --- !u!1 &954926499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,11 +2406,16 @@ PrefabInstance:
     - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
       propertyPath: _movementKeys.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
       propertyPath: _movementKeys.Array.data[4]
+      value: 282
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
+        type: 3}
+      propertyPath: _movementKeys.Array.data[5]
       value: 282
       objectReference: {fileID: 0}
     - target: {fileID: 3265950753220538244, guid: 4818e406df2a7794781ca96f08ae0c9c,

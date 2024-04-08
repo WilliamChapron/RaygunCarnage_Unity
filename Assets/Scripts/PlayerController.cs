@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public float _moveSpeed = 5f;
     public float _rotationSpeed = 600f;
     public List<KeyCode> _movementKeys;
-    
-    private Shield playerShield;
+
     private List<Power> listOfPower;
+
     public enum PlayerState
     {
         Idle,
         Running,
-        OnPower
+        Shield,
+        Dash
     }
 
     private PlayerState _currentState;
@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
         listOfPower = new List<Power>();
         Shield shield = GetComponent<Shield>();
         listOfPower.Add(shield);
+        DashPower dash = GetComponent<DashPower>();
+        listOfPower.Add(dash);
     }
 
     private void playerState()
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
                     SetPlayerState(PlayerState.Idle);
                 }
                 break;
-            case PlayerState.OnPower:
+            case PlayerState.Shield:
                 animator.CrossFade("Idle", 0f);
                 break;
         }
@@ -78,22 +80,25 @@ public class PlayerController : MonoBehaviour
         MovementControl();
     }
 
-    private void Control(Power power) 
+    private void Control(Power power)
     {
-        
         if (power._powerState != Power.PowerState.Using)
         {
-            if (_currentState != PlayerState.OnPower)
+            if (_currentState != PlayerState.Shield)
             {
-                if (Input.GetKeyDown(_movementKeys[4]))
+                if (Input.GetKeyDown(_movementKeys[4]) && power == listOfPower[0])
                 {
-                    SetPlayerState(PlayerState.OnPower);
+                    SetPlayerState(PlayerState.Shield);
+                    power.LunchPower();
+                }
+                else if (Input.GetKeyDown(_movementKeys[5]) && power == listOfPower[1])
+                {
+                    SetPlayerState(PlayerState.Dash);
                     power.LunchPower();
                 }
             }
         }
-        
-    }
+    }  
 
     private void UpdatePowerState()
     {
