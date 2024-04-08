@@ -19,7 +19,7 @@ public class HealthComponent : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         _healthBar.SetMaxHealth(_maxHealth);
-        Debug.Log("Health COmponent : ");
+        //Debug.Log("Health COmponent : ");
     }
 
     void Update()

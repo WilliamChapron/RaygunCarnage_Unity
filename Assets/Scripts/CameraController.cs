@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float _moveSpeed = 5f;
     void Start()
     {
         Cursor.visible = true;
@@ -14,6 +14,11 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Controls WASD
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
+
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * _moveSpeed * Time.deltaTime;
+        transform.Translate(movement);
     }
 }
