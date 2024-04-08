@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - EntityEmpty
+  - Shield
   layers:
   - Default
   - TransparentFX
