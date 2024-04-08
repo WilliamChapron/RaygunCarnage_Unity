@@ -1,46 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public float _moveSpeed = 5f;
     public float _rotationSpeed = 600f;
-    private float _lastInputTime;
     public List<KeyCode> _movementKeys;
     
-    private Shield playerShield; 
-    public Slider slider;
-    private float powercurrentTime;
-    private float startTime;
-
+    private Shield playerShield;
+    private List<Power> listOfPower;
     public enum PlayerState
     {
         Idle,
         Running,
-        Shield
+        OnPower
     }
 
     private PlayerState _currentState;
 
-    public enum PowerState
-    {
-        CanBeUse,
-        Used,
-        Charching
-    }
-
-    private PowerState _powerState1;
-    private PowerState _powerState2;
-
     void Start()
     {
         SetPlayerState(PlayerState.Idle);
-        SetPowerState(PowerState.CanBeUse , _powerState1);
-        SetPowerState(PowerState.CanBeUse, _powerState2);
-        playerShield = GetComponent<Shield>();
+        listOfPower = new List<Power>();
+        Shield shield = GetComponent<Shield>();
+        listOfPower.Add(shield);
     }
 
     private void playerState()
@@ -62,8 +48,8 @@ public class PlayerController : MonoBehaviour
                     SetPlayerState(PlayerState.Idle);
                 }
                 break;
-            case PlayerState.Shield:
-                animator.CrossFade("Shield", 0f);
+            case PlayerState.OnPower:
+                animator.CrossFade("Idle", 0f);
                 break;
         }
     }
@@ -71,54 +57,6 @@ public class PlayerController : MonoBehaviour
     private void SetPlayerState(PlayerState newState)
     {
         _currentState = newState;
-    }
-
-    private void powerState()
-    {
-        switch (_powerState1)
-        {
-            case PowerState.CanBeUse:
-                if (!playerShield.haveShield)
-                {
-                    _powerState1 = PowerState.Used;
-                }
-                else
-                {
-                    slider.value = 1;
-                    shieldControl();
-                }
-                break;
-            case PowerState.Used:
-                //Plus tard avoir des verif
-                startTime = Time.time;
-                _powerState1 = PowerState.Charching;
-                SetPlayerState(PlayerState.Idle);
-                break;
-            case PowerState.Charching:
-                ChargePower();
-                break;
-        }
-    }
-
-    private void SetPowerState(PowerState newState, PowerState powerState)
-    {
-        powerState = newState;
-    }
-
-    private void ChargePower()
-    {
-        if (powercurrentTime < playerShield.chargingTime)
-        {
-            powercurrentTime = Time.time - startTime;
-            slider.value = (powercurrentTime * 100f / playerShield.chargingTime) / 100f;
-        }
-        else
-        {
-            slider.value = 1;
-            playerShield.haveShield = true;
-            _powerState1 = PowerState.CanBeUse;
-            powercurrentTime = 0.0f;
-        } 
     }
 
     private void RotateControl()
@@ -138,26 +76,42 @@ public class PlayerController : MonoBehaviour
     private void Movement()
     {
         MovementControl();
-        _lastInputTime = Time.time; 
     }
 
-    private void shieldControl() 
+    private void Control(Power power) 
     {
-       
-        if (_currentState != PlayerState.Shield)
+        
+        if (power._powerState != Power.PowerState.Using)
         {
-            if (Input.GetKeyDown(_movementKeys[4]))
+            if (_currentState != PlayerState.OnPower)
             {
-                SetPlayerState(PlayerState.Shield);
-                playerShield.CreateShield();
+                if (Input.GetKeyDown(_movementKeys[4]))
+                {
+                    SetPlayerState(PlayerState.OnPower);
+                    power.LunchPower();
+                }
             }
+        }
+        
+    }
+
+    private void UpdatePowerState()
+    {
+        for (int i = 0; i < listOfPower.Count; i++)
+        {
+            if (listOfPower[i]._powerState == Power.PowerState.Used)
+            {
+                SetPlayerState(PlayerState.Idle);
+            }
+            Control(listOfPower[i]);
+            listOfPower[i].powerState();
         }
     }
 
     public void Update()
     {
         RotateControl();
-        powerState();
+        UpdatePowerState();
         playerState();
     }
 }

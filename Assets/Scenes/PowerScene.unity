@@ -1089,10 +1089,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4a978c35538e4486b0088ac34e717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  havePower: 0
+  chargingTime: 6
+  powerCreationTime: 0
+  _powerState: 0
   ShieldPrefab: {fileID: 954926499}
   playerTransform: {fileID: 675214201}
-  haveShield: 0
-  chargingTime: 6
 --- !u!1 &733543439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,10 +1372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4a978c35538e4486b0088ac34e717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 746161196}
+  havePower: 0
+  chargingTime: 6
+  powerCreationTime: 0
+  _powerState: 0
   ShieldPrefab: {fileID: 954926499}
   playerTransform: {fileID: 887747589}
-  haveShield: 0
-  chargingTime: 6
 --- !u!1 &954926499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,10 +1498,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4a978c35538e4486b0088ac34e717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  havePower: 0
+  chargingTime: 0
+  powerCreationTime: 0
+  _powerState: 0
   ShieldPrefab: {fileID: 0}
   playerTransform: {fileID: 0}
-  haveShield: 1
-  chargingTime: 0
 --- !u!114 &954926505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,10 +1517,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4a978c35538e4486b0088ac34e717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  havePower: 0
+  chargingTime: 0
+  powerCreationTime: 0
+  _powerState: 0
   ShieldPrefab: {fileID: 0}
   playerTransform: {fileID: 0}
-  haveShield: 0
-  chargingTime: 0
 --- !u!1 &1173451649
 GameObject:
   m_ObjectHideFlags: 0
