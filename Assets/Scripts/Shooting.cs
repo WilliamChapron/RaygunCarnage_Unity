@@ -1,100 +1,112 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Shooting : MonoBehaviour
 {
-    public GameObject projectilePrefab; 
     public Transform playerTransform;
     public bool canShoot;
-    public float projectileSpeed = 30f;
 
-    public float _maxLaserRange = 100f; 
-    public float laserWidth = 0.1f; 
-    public Material laserMaterial; 
-    private LineRenderer lineRenderer;
+    public float _maxLaserRange = 100f;
+    public float laserWidth = 0.1f;
+    public Material laserMaterial;
+    protected LineRenderer lineRenderer;
 
+    public float timeBetweenShots = 0.5f; // In seconds
+    private float timeSinceLastShot;
 
-    void Start()
+    public List<ShootingPower> shootingPowers;
+
+    public void Start()
     {
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = laserWidth;
         lineRenderer.endWidth = laserWidth;
         lineRenderer.material = laserMaterial;
-        lineRenderer.positionCount = 2; 
-        lineRenderer.enabled = false; 
+        lineRenderer.positionCount = 2;
+        lineRenderer.enabled = false;
+
+        // Shooting Components
+        shootingPowers = new List<ShootingPower>();
+
+        //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
+        //shootingPowers.Add(pushShooting);
+
+        ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
+        shootingPowers.Add(explosionShooting);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        timeSinceLastShot += Time.deltaTime;
+
+        if (Input.GetButtonDown("Fire1") && canShoot && timeSinceLastShot >= timeBetweenShots)
         {
-            if (canShoot) {
-                FireLaser();
-            }
+            timeSinceLastShot = 0f;
+            FireLaser();
         }
     }
 
-    //void Shoot()
-    //{
-
-    //    GameObject projectile = Instantiate(projectilePrefab, playerTransform.position + new Vector3(0.0f, 1.0f, 1.5f), playerTransform.rotation * Quaternion.Euler(90f, 0f, 0f));
-    //    projectile.SetActive(true);
-    //    Rigidbody rb = projectile.GetComponent<Rigidbody>();
-
-    //    rb.velocity = playerTransform.forward * projectileSpeed;
-
-    //}
-
-
-
-    void FireLaser()
+    private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
-        RaycastHit hit;
-        Vector3 endPoint;
-
-        Vector3 startPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-        if (Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange))
+        Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
+        endPoint = hit.point;
+        Collider collider = hit.collider;
+        if (collider != null)
         {
-            endPoint = hit.point;
-            Collider collider = hit.collider;
-            if (collider != null)
-            {
-                Debug.Log("Objet touché : " + collider.gameObject.name);
-
-                ColliderComponent colliderComponent = gameObject.GetComponent<ColliderComponent>();
-
-                colliderComponent.OnLaserCollision();
-
-                //Collision collision = new Collision
-                //{
-                //    collider = colliderComponent
-                //};
-
-                //if (colliderComponent != null)
-                //{
-                //    colliderComponent.OnCollisionEnter(new Collision(collider));
-                //}
-            }
-        }
-        else
-        {
-            endPoint = startPoint + transform.forward * _maxLaserRange;
+            //Debug.Log("Objet touché : " + collider.gameObject.name);
+            shootingPowers[0].OnCollision(hit.collider);
         }
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
-
-
         lineRenderer.enabled = true;
-
 
         Invoke("DisableLaser", 0.1f);
     }
 
-    void DisableLaser()
+    public void PerformNoRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
+    {
+        endPoint = startPoint + transform.forward * _maxLaserRange;
+        shootingPowers[0].PerformExplosion(endPoint);
+
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
+        lineRenderer.enabled = true;
+
+        Invoke("DisableLaser", 0.1f);
+    }
+
+    protected void FireLaser()
+    {
+        RaycastHit hit;
+        Vector3 endPoint = Vector3.zero;
+
+        Vector3 startPoint = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z);
+
+        bool isRaycast = Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange);
+
+        if (isRaycast)
+        {
+            PerformRaycast(hit, startPoint, endPoint);
+        }
+        else
+        {
+            PerformNoRaycast(hit, startPoint, endPoint);
+        }
+
+        if (shootingPowers[0].GetType() == typeof(ShootingExplosion))
+        {
+            ShootingExplosion explosionPower = (ShootingExplosion)shootingPowers[0];
+            explosionPower.PerformExplosion(endPoint);
+        }
+
+    }
+
+    protected void DisableLaser()
     {
         lineRenderer.enabled = false;
     }

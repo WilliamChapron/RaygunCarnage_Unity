@@ -24,12 +24,12 @@ public class HealthComponent : MonoBehaviour
 
     void Update()
     {
-        _healthBar.PosUpdate();
     }
 
     public void TakeDamage(int value)
     {
         _currentHealth -= value;
+        _healthBar.SetHealth(_currentHealth);
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
