@@ -1565,7 +1565,6 @@ MonoBehaviour:
   _powerState: 0
   DashSpeed: 3
   DashTravelTime: 0.3
-<<<<<<< Updated upstream
   PC: {fileID: 887747598}
   tr: {fileID: 812489052}
 --- !u!114 &887747598 stripped
@@ -1580,9 +1579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdb8e85c017e36478d5fa7105794be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-=======
-  tr: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &954926499
 GameObject:
   m_ObjectHideFlags: 0
