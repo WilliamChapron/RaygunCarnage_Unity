@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Shooting : MonoBehaviour
 {
@@ -17,7 +20,7 @@ public class Shooting : MonoBehaviour
 
     public List<ShootingPower> shootingPowers;
 
-    protected virtual void Start()
+    public void Start()
     {
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = laserWidth;
@@ -36,7 +39,7 @@ public class Shooting : MonoBehaviour
         shootingPowers.Add(explosionShooting);
     }
 
-    protected virtual void Update()
+    public void Update()
     {
         timeSinceLastShot += Time.deltaTime;
 
@@ -47,44 +50,60 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    protected void FireLaser()
+    private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
-        RaycastHit hit;
-        Vector3 endPoint;
-
-        Vector3 startPoint = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
-
-        if (Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange))
+        Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
+        endPoint = hit.point;
+        Collider collider = hit.collider;
+        if (collider != null)
         {
-            //Debug.Log("RAYCAST !!!!");
-            endPoint = hit.point;
-            Collider collider = hit.collider;
-            if (collider != null)
-            {
-                Debug.Log("Objet touché : " + collider.gameObject.name);
-                shootingPowers[0].OnCollision(hit.collider);
-            }
-        }
-        else
-        {
-            //Debug.Log("Pas DE RAYCAST");
-            endPoint = startPoint + transform.forward * _maxLaserRange;
+            //Debug.Log("Objet touché : " + collider.gameObject.name);
+            shootingPowers[0].OnCollision(hit.collider);
         }
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
-
-
         lineRenderer.enabled = true;
 
         Invoke("DisableLaser", 0.1f);
+    }
+
+    public void PerformNoRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
+    {
+        endPoint = startPoint + transform.forward * _maxLaserRange;
+        shootingPowers[0].PerformExplosion(endPoint);
+
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
+        lineRenderer.enabled = true;
+
+        Invoke("DisableLaser", 0.1f);
+    }
+
+    protected void FireLaser()
+    {
+        RaycastHit hit;
+        Vector3 endPoint = Vector3.zero;
+
+        Vector3 startPoint = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z);
+
+        bool isRaycast = Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange);
+
+        if (isRaycast)
+        {
+            PerformRaycast(hit, startPoint, endPoint);
+        }
+        else
+        {
+            PerformNoRaycast(hit, startPoint, endPoint);
+        }
 
         if (shootingPowers[0].GetType() == typeof(ShootingExplosion))
         {
             ShootingExplosion explosionPower = (ShootingExplosion)shootingPowers[0];
             explosionPower.PerformExplosion(endPoint);
         }
-        
+
     }
 
     protected void DisableLaser()

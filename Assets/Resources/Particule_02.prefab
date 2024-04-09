@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 48501371327183050}
   - component: {fileID: 7694908585589753392}
   m_Layer: 0
-  m_Name: Hit_02
+  m_Name: Particule_02
   m_TagString: EntityEmpty
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

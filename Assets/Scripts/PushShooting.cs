@@ -11,6 +11,11 @@ public class ShootingPower : MonoBehaviour
     {
 
     }
+
+    public virtual void PerformExplosion(Vector3 endPoint)
+    {
+
+    }
 }
 
 
@@ -51,6 +56,11 @@ public class ShootingPush : ShootingPower
             yield return new WaitForSeconds(duration / numIterations);
         }
     }
+
+    public override void PerformExplosion(Vector3 endPoint)
+    {
+
+    }
 }
 
 public class ShootingExplosion : ShootingPower
@@ -59,12 +69,12 @@ public class ShootingExplosion : ShootingPower
     GameObject particlePrefab;
     public void Start()
     {
-        particlePrefab = Resources.Load<GameObject>("Hit_02");
+        particlePrefab = Resources.Load<GameObject>("Particule_02");
     }
 
-    public void PerformExplosion(Vector3 endPoint)
+    public override void PerformExplosion(Vector3 endPoint)
     {
-        Debug.Log(particlePrefab.name);
+        //Debug.Log(particlePrefab.name);
 
         GameObject particleObject = Instantiate(particlePrefab, endPoint, Quaternion.identity);
         ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
