@@ -9,6 +9,7 @@ TagManager:
   - EntityEmpty
   - PlayerControllable
   - Effect
+  - Bonus
   layers:
   - Default
   - TransparentFX
