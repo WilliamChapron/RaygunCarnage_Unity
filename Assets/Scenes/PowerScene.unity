@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   havePower: 0
-  chargingTime: 6
+  TimeToCharge: 0
   powerCreationTime: 0
   _powerState: 0
   ShieldPrefab: {fileID: 954926499}
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 746161196}
   havePower: 0
-  chargingTime: 6
+  TimeToCharge: 6
   powerCreationTime: 0
   _powerState: 0
   ShieldPrefab: {fileID: 954926499}
@@ -1409,9 +1409,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b7d5938d68a574e98ab445e358c8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 2072117510}
+  havePower: 0
+  TimeToCharge: 6
+  powerCreationTime: 0
+  _powerState: 0
   DashSpeed: 3
   DashTravelTime: 0.3
-  DashCooldownTime: 2
   tr: {fileID: 0}
 --- !u!1 &954926499
 GameObject:
@@ -1534,7 +1538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   havePower: 0
-  chargingTime: 0
+  TimeToCharge: 0
   powerCreationTime: 0
   _powerState: 0
   ShieldPrefab: {fileID: 0}
@@ -1553,7 +1557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   havePower: 0
-  chargingTime: 0
+  TimeToCharge: 0
   powerCreationTime: 0
   _powerState: 0
   ShieldPrefab: {fileID: 0}
