@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.VFX;
 public class Bonuses : MonoBehaviour
 {
     List<string> bonus = new List<string> { "Ethereal", "Explosive", "Bouncy" };
@@ -15,36 +17,163 @@ public class Bonuses : MonoBehaviour
     public bool PowerUpInCooldown = false;
     public float PowerUpCooldownTime = 10f;
     public int PowerRandom = 0;
+    public int RandomSpawn = 0;
+
+    Vector3 spot1 = new Vector3(50, 24, 3);
+
+    Vector3 spot2 = new Vector3(50, 24, 16);
+
+    Vector3 spot3 = new Vector3(64, 24, 28);
+
+    Vector3 spot4 = new Vector3(37, 24, 28);
+
+    Vector3 spot5 = new Vector3(32, 24, 64);
+
+    Vector3 spot6 = new Vector3(68, 24, 59);
+
+    Vector3 spot7 = new Vector3(73, 24, 5);
+
+    Vector3 spot8 = new Vector3(35, 24, 5);
 
     public void PowerUpSpawn()
     {
-        if (PowerRandom == 3) { PowerRandom = 0; }
         if (PowerRandom == 0)
         {
-            Instantiate(PowerUpOne);
-            return;
+            if (RandomSpawn == 1)
+            {
+                Instantiate(PowerUpOne, spot1, Quaternion.identity);
+                return;
+            }
+            else if (RandomSpawn == 2)
+            {
+                Instantiate(PowerUpOne, spot2, Quaternion.identity);
+                return;
+            }
+            else if (RandomSpawn == 3)
+            {
+                Instantiate(PowerUpOne, spot3, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 4)
+            {
+                Instantiate(PowerUpOne, spot4, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 5)
+            {
+                Instantiate(PowerUpOne, spot5, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 6)
+            {
+                Instantiate(PowerUpOne, spot6, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 7)
+            {
+                Instantiate(PowerUpOne, spot7, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 8)
+            {
+                Instantiate(PowerUpOne, spot8, Quaternion.identity);
+                return;
+            }
+
         }
         else if (PowerRandom == 1)
         {
-            Instantiate(PowerUpTwo);
-            return;
+            if (RandomSpawn == 1)
+            {
+                Instantiate(PowerUpTwo, spot1, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 2)
+            {
+                Instantiate(PowerUpTwo, spot2, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 3)
+            {
+                Instantiate(PowerUpTwo, spot3, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 4)
+            {
+                Instantiate(PowerUpTwo, spot4, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 5)
+            {
+                Instantiate(PowerUpTwo, spot5, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 6)
+            {
+                Instantiate(PowerUpTwo, spot6, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 7)
+            {
+                Instantiate(PowerUpTwo, spot7, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 8)
+            {
+                Instantiate(PowerUpTwo, spot8, Quaternion.identity);
+                return;
+            }
         }
         else if (PowerRandom == 2)
         {
-            Instantiate(PowerUpThree);
-            return;
+            if (RandomSpawn == 1)
+            {
+                Instantiate(PowerUpThree, spot1, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 2)
+            {
+                Instantiate(PowerUpThree, spot2, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 3)
+            {
+                Instantiate(PowerUpThree, spot3, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 4)
+            {
+                Instantiate(PowerUpThree, spot4, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 5)
+            {
+                Instantiate(PowerUpThree, spot5, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 6)
+            {
+                Instantiate(PowerUpThree, spot6, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 7)
+            {
+                Instantiate(PowerUpThree, spot7, Quaternion.identity);
+                return;
+            }
+            else if(RandomSpawn == 8)
+            {
+                Instantiate(PowerUpThree, spot8, Quaternion.identity);
+                return;
+            }
         }
         return;
-    }
-
-    void Start()
-    {
-
     }
     
     // Update is called once per frame
     void Update()
     {
+
         if (PowerUpInCooldown == false) 
         { 
         StartCoroutine(PowerUpCooldownIE());
@@ -54,12 +183,17 @@ public class Bonuses : MonoBehaviour
     {
         PowerUpInCooldown = true;
         yield return new WaitForSeconds(PowerUpCooldownTime);
-        PowerRandom += 1;
-        
+        PowerRandom = Random.Range(0, 2);
+        RandomSpawn = Random.Range(1, 8);
         Debug.Log("Power Random est " + PowerRandom);
         PowerUpSpawn();
         PowerUpInCooldown = false;
         
+    }
+
+    private void OnTriggerEnter(Collider player)
+    {
+        Destroy(gameObject);
     }
 }
 
