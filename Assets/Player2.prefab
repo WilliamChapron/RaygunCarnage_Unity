@@ -2378,7 +2378,6 @@ GameObject:
   - component: {fileID: 7267969653596437602}
   - component: {fileID: 3913340870304705672}
   - component: {fileID: 2866919669132721288}
-  - component: {fileID: 2262299275856724412}
   m_Layer: 0
   m_Name: Player2
   m_TagString: PlayerControllable
@@ -2485,13 +2484,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c9497110dd23d4eb98fc961b7362ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 0}
   playerTransform: {fileID: 5909395398804372840}
   canShoot: 0
-  projectileSpeed: 30
   _maxLaserRange: 100
   laserWidth: 0.1
   laserMaterial: {fileID: 2100000, guid: a8a81586ce16f43429f4f39bf066f1d3, type: 2}
+  timeBetweenShots: 0.5
+  shootingPowers: []
+  layerCollide:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &3913340870304705672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2540,18 +2542,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2262299275856724412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6433870779749738450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e043fdad51acb5b4e99aa157a0797540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6548775273085021169
 GameObject:
   m_ObjectHideFlags: 0
