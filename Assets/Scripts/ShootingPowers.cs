@@ -9,7 +9,6 @@ public class ShootingPower : MonoBehaviour
 
     public virtual void OnCollision(Collider collider)
     {
-
     }
 
     public virtual void PerformExplosion(Vector3 endPoint)
@@ -23,6 +22,10 @@ public class ShootingPower : MonoBehaviour
         if (healthComponent != null)
         {
             healthComponent.TakeDamage(200);
+        }
+        else
+        {
+            Debug.Log(collider.gameObject.name + " N'a pas de health component ! ");
         }
     }
 }
@@ -77,18 +80,11 @@ public class ShootingExplosion : ShootingPower
 
     public override void PerformExplosion(Vector3 endPoint)
     {
-
         //Debug.Log("Perform Shooting Explode");
-        //Debug.Log(particlePrefab.name);
-
-
-
         GameObject particleObject = Instantiate(particlePrefab, endPoint, Quaternion.identity);
         ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
 
         particleObject.GetComponent<ColliderComponent>().SetPlayerName(gameObject.name);
-
-        particleObject.GetComponent<ColliderComponent>().PrintPlayerName();
 
         if (particleSystem != null)
         {
@@ -99,7 +95,6 @@ public class ShootingExplosion : ShootingPower
         {
             Debug.LogError("Le GameObject instancié ne contient pas de composant Particle System !");
         }
-
     }
 
     public override void OnCollision(Collider collider)
@@ -118,7 +113,6 @@ public class ShootingCrossWall : ShootingPower
 
     public override void OnCollision(Collider collider)
     {
-
         PerformDamage(collider);
     }
 }
