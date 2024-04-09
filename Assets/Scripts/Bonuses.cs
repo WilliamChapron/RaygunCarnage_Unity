@@ -6,7 +6,6 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
 public class Bonuses : MonoBehaviour
 {
-    List<string> bonus = new List<string> { "Ethereal", "Explosive", "Bouncy" };
     // Start is called before the first frame update
     static System.Random random = new System.Random();
 
@@ -193,7 +192,21 @@ public class Bonuses : MonoBehaviour
 
     private void OnTriggerEnter(Collider player)
     {
-        Destroy(gameObject);
+        if (gameObject == PowerUpOne)
+        {
+
+            Destroy(gameObject);
+        }
+        else if (gameObject == PowerUpTwo)
+        {
+
+            Destroy(gameObject);
+        }
+        else if (gameObject == PowerUpThree)
+        {
+
+            Destroy(gameObject);
+        }
     }
 }
 
