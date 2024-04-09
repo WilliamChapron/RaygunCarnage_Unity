@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    public float _moveSpeed = 5f;
+    public float  _moveSpeed = 5f;
     public float _rotationSpeed = 600f;
     public List<KeyCode> _movementKeys;
 
@@ -53,6 +53,17 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Shield:
                 animator.CrossFade("Idle", 0f);
                 break;
+            case PlayerState.Dash:
+                if (Input.GetKey(_movementKeys[0]) || Input.GetKey(_movementKeys[1]) || Input.GetKey(_movementKeys[2]) || Input.GetKey(_movementKeys[3]))
+                {
+                    Movement();
+                    animator.CrossFade("Running", 0f);
+                    if (!Input.GetKey(_movementKeys[0]) && !Input.GetKey(_movementKeys[1]) && !Input.GetKey(_movementKeys[2]) && !Input.GetKey(_movementKeys[3]))
+                    {
+                        SetPlayerState(PlayerState.Idle);
+                    }
+                }
+                break;
         }
     }
 
@@ -82,22 +93,20 @@ public class PlayerController : MonoBehaviour
 
     private void Control(Power power)
     {
-        if (power._powerState != Power.PowerState.Using)
+        
+        if (_currentState != PlayerState.Shield)
         {
-            if (_currentState != PlayerState.Shield)
+            if (Input.GetKeyDown(_movementKeys[4]) && power == listOfPower[0] && power._powerState != Power.PowerState.Using)
             {
-                if (Input.GetKeyDown(_movementKeys[4]) && power == listOfPower[0])
-                {
-                    SetPlayerState(PlayerState.Shield);
-                    power.LunchPower();
-                }
-                else if (Input.GetKeyDown(_movementKeys[5]) && power == listOfPower[1])
-                {
-                    SetPlayerState(PlayerState.Dash);
-                    power.LunchPower();
-                }
+                SetPlayerState(PlayerState.Shield);
+                power.LunchPower();
             }
-        }
+            else if (Input.GetKeyDown(_movementKeys[5]) && power == listOfPower[1])
+            {
+                SetPlayerState(PlayerState.Dash);
+                power.LunchPower();
+            }
+        } 
     }  
 
     private void UpdatePowerState()
@@ -115,6 +124,7 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        Debug.Log(_moveSpeed);
         RotateControl();
         UpdatePowerState();
         playerState();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float _moveSpeed = 5f;
+    public float _cameramoveSpeed = 5f;
     void Start()
     {
         Cursor.visible = true;
@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * _moveSpeed * Time.deltaTime;
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * _cameramoveSpeed * Time.deltaTime;
         transform.Translate(movement);
     }
 }

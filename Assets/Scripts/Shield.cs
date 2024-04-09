@@ -24,11 +24,14 @@ public class Shield : Power
 
     override public void LunchPower()
     {
-        SetPowerState(PowerState.Using);
-        shieldInstance = Instantiate(ShieldPrefab, playerTransform.position + new Vector3(0.0f, playerTransform.position.y + 1f), Quaternion.identity);
-        shieldInstance.SetActive(true);
-        powerCreationTime = Time.time;
-        havePower = true;
+        if (_powerState == PowerState.CanBeUse )
+        {
+            SetPowerState(PowerState.Using);
+            shieldInstance = Instantiate(ShieldPrefab, playerTransform.position + new Vector3(0.0f, playerTransform.position.y + 1f), Quaternion.identity);
+            shieldInstance.SetActive(true);
+            powerCreationTime = Time.time;
+            havePower = true;
+        }
     }
 
     private bool NoMoreShield(float time)

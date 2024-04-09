@@ -12,6 +12,7 @@ public class LoadingScene : MonoBehaviour
     public GameObject slider;
     public void LoadScene(int sceneId)
     {
+        Debug.Log("Test");
         button.SetActive(false);
         slider.SetActive(true);
         StartCoroutine(LoadSceneAsnc(sceneId));

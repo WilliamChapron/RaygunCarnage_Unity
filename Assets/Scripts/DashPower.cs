@@ -7,13 +7,14 @@ public class DashPower : Power
     public float DashSpeed = 3f;
     public float DashTravelTime = 0.3f;
 
-    private PlayerController PC;
-
+    public PlayerController PC;
+    private bool hasBeenDestroy;
     [SerializeField] TrailRenderer tr;
 
     // Start is called before the first frame update 
     void Start()
     {
+        hasBeenDestroy = false;
         havePower = true;
     }
 
@@ -22,16 +23,27 @@ public class DashPower : Power
     {
         if (NoMoreDash(0.3f))
         {
-            havePower = false;
+            if (!hasBeenDestroy)
+            {
+                tr.emitting = false;
+                havePower = false;
+                PC._moveSpeed /= DashSpeed;
+                hasBeenDestroy=true;
+            }  
         }
     }
 
     override public void LunchPower()
     {
-        SetPowerState(PowerState.Using);
-        powerCreationTime = Time.time;
-        havePower = true;
-        PC._moveSpeed *= DashSpeed;
+        if (_powerState == PowerState.CanBeUse)     
+        {
+            tr.emitting = true;
+            SetPowerState(PowerState.Using);
+            powerCreationTime = Time.time;
+            havePower = true;
+            PC._moveSpeed *= DashSpeed;
+            hasBeenDestroy = false;
+        }
     }
 
     private bool NoMoreDash(float time)
