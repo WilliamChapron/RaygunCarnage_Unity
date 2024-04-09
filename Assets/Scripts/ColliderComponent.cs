@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class ColliderComponent : MonoBehaviour
 {
-    private Rigidbody rb;
-    private bool hasCollided = false;
 
-    
+    private string playerName;
+
+    public void SetPlayerName(string name)
+    {
+        playerName = name;
+    }
+
+    public void PrintPlayerName()
+    {
+        Debug.Log(playerName);
+    }
 
     void OnTriggerEnter(Collider other)
     {
-
-        if (other.CompareTag("EntityEmpty"))
+        if (other.CompareTag("PlayerControllable") && other.gameObject.name != playerName)
         {
             Debug.Log(name + " a une Collision avec : " + other.gameObject.name);
-            //HealthComponent healthComponent = collision.collider.gameObject.GetComponent<HealthComponent>();
-            //if (healthComponent != null)
-            //{
-            //    healthComponent.TakeDamage(20);
-            //}
+            HealthComponent healthComponent = other.gameObject.GetComponent<HealthComponent>();
+            if (healthComponent != null)
+            {
+                healthComponent.TakeDamage(200);
+                Debug.Log("Prend Dommage a cause particule");
+            }
         }
     }
 
@@ -27,10 +35,10 @@ public class ColliderComponent : MonoBehaviour
 
 
 
-    public void OnCollisionStay(Collision collision)
-    {
+    //public void OnCollisionStay(Collision collision)
+    //{
 
-    }
+    //}
 
 
 

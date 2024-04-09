@@ -16,27 +16,29 @@ public class ShootingPower : MonoBehaviour
     {
 
     }
+
+    public virtual void PerformDamage(Collider collider)
+    {
+        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
+        if (healthComponent != null)
+        {
+            healthComponent.TakeDamage(200);
+        }
+    }
 }
 
 
 public class ShootingPush : ShootingPower
 {
-
     public override void OnCollision(Collider collider)
     {
-        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
-
+        //Debug.Log("Perform Shooting PUSH");
         Rigidbody rb = collider.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
             StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position));
         }
-
-        if (healthComponent != null)
-        {
-            healthComponent.TakeDamage(20);
-            //Debug.Log("Le laser a touché cet objet : " + collider.name);
-        }
+        PerformDamage(collider);
     }
 
     private IEnumerator ApplyForceOverDuration(Rigidbody rb, Vector3 targetPosition)
@@ -72,14 +74,21 @@ public class ShootingExplosion : ShootingPower
         particlePrefab = Resources.Load<GameObject>("Particule_02");
     }
 
+
     public override void PerformExplosion(Vector3 endPoint)
     {
+
+        //Debug.Log("Perform Shooting Explode");
         //Debug.Log(particlePrefab.name);
+
+
 
         GameObject particleObject = Instantiate(particlePrefab, endPoint, Quaternion.identity);
         ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
 
-        //SphereExplode
+        particleObject.GetComponent<ColliderComponent>().SetPlayerName(gameObject.name);
+
+        particleObject.GetComponent<ColliderComponent>().PrintPlayerName();
 
         if (particleSystem != null)
         {
@@ -90,15 +99,26 @@ public class ShootingExplosion : ShootingPower
         {
             Debug.LogError("Le GameObject instancié ne contient pas de composant Particle System !");
         }
+
     }
 
     public override void OnCollision(Collider collider)
     {
 
-        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
-        if (healthComponent != null)
-        {
-            healthComponent.TakeDamage(20);
-        }
+        PerformDamage(collider);
+    }
+}
+
+public class ShootingCrossWall : ShootingPower
+{
+
+    public override void PerformExplosion(Vector3 endPoint)
+    {
+    }
+
+    public override void OnCollision(Collider collider)
+    {
+
+        PerformDamage(collider);
     }
 }

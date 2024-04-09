@@ -20,6 +20,8 @@ public class Shooting : MonoBehaviour
 
     public List<ShootingPower> shootingPowers;
 
+    public LayerMask layerCollide;
+
     public void Start()
     {
         lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -52,9 +54,13 @@ public class Shooting : MonoBehaviour
 
     private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
-        Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
+        //Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
+
         endPoint = hit.point;
+
         Collider collider = hit.collider;
+
+
         if (collider != null)
         {
             //Debug.Log("Objet touché : " + collider.gameObject.name);
@@ -66,18 +72,29 @@ public class Shooting : MonoBehaviour
         lineRenderer.enabled = true;
 
         Invoke("DisableLaser", 0.1f);
+
+
+        shootingPowers[0].PerformExplosion(endPoint);
+
+
+
     }
+
 
     public void PerformNoRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
+        //Debug.Log("NO RAYCAST !!!!");
         endPoint = startPoint + transform.forward * _maxLaserRange;
-        shootingPowers[0].PerformExplosion(endPoint);
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
         lineRenderer.enabled = true;
 
         Invoke("DisableLaser", 0.1f);
+
+
+        //Debug.Log("We touch nothing but we perform Explode");
+        shootingPowers[0].PerformExplosion(endPoint);
     }
 
     protected void FireLaser()
@@ -87,7 +104,7 @@ public class Shooting : MonoBehaviour
 
         Vector3 startPoint = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z);
 
-        bool isRaycast = Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange);
+        bool isRaycast = Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange, layerCollide);
 
         if (isRaycast)
         {
@@ -98,11 +115,6 @@ public class Shooting : MonoBehaviour
             PerformNoRaycast(hit, startPoint, endPoint);
         }
 
-        if (shootingPowers[0].GetType() == typeof(ShootingExplosion))
-        {
-            ShootingExplosion explosionPower = (ShootingExplosion)shootingPowers[0];
-            explosionPower.PerformExplosion(endPoint);
-        }
 
     }
 
