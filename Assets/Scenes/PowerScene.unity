@@ -381,6 +381,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &162385939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162385940}
+  m_Layer: 0
+  m_Name: PowerP1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &162385940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162385939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 44.88501, y: 33.483, z: 37.584145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1818903792}
+  - {fileID: 287965184}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287965180
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +509,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2072117509}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 162385940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -709,7 +742,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4be1965276a374b8138419f108c6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameramoveSpeed: 5
+  _moveSpeed: 5
+  updateInterval: 100
+  target: {fileID: 0}
 --- !u!1 &379335401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,13 +1100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c9497110dd23d4eb98fc961b7362ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1229761420}
   playerTransform: {fileID: 675214201}
   canShoot: 0
-  projectileSpeed: 30
   _maxLaserRange: 100
   laserWidth: 0.1
   laserMaterial: {fileID: 0}
+  timeBetweenShots: 0.5
+  shootingPowers: []
+  layerCollide:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &675214203
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1497,13 +1535,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c9497110dd23d4eb98fc961b7362ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1229761420}
   playerTransform: {fileID: 887747589}
   canShoot: 0
-  projectileSpeed: 30
   _maxLaserRange: 100
   laserWidth: 0.1
   laserMaterial: {fileID: 0}
+  timeBetweenShots: 0.5
+  shootingPowers: []
+  layerCollide:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &887747591
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1591,8 +1632,6 @@ GameObject:
   - component: {fileID: 954926502}
   - component: {fileID: 954926501}
   - component: {fileID: 954926500}
-  - component: {fileID: 954926504}
-  - component: {fileID: 954926505}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Shield
@@ -1686,44 +1725,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2128606253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &954926504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954926499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e4a978c35538e4486b0088ac34e717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  havePower: 0
-  TimeToCharge: 0
-  powerCreationTime: 0
-  _powerState: 0
-  ShieldPrefab: {fileID: 0}
-  playerTransform: {fileID: 0}
---- !u!114 &954926505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954926499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e4a978c35538e4486b0088ac34e717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  havePower: 0
-  TimeToCharge: 0
-  powerCreationTime: 0
-  _powerState: 0
-  ShieldPrefab: {fileID: 0}
-  playerTransform: {fileID: 0}
 --- !u!1 &1173451649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,7 +2343,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 746161195}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 162385940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2568,7 +2569,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerShield
       value: 
-      objectReference: {fileID: 954926504}
+      objectReference: {fileID: 0}
     - target: {fileID: 1098916978235762813, guid: 4818e406df2a7794781ca96f08ae0c9c,
         type: 3}
       propertyPath: _movementKeys.Array.size
@@ -2764,5 +2765,4 @@ SceneRoots:
   - {fileID: 2121320051}
   - {fileID: 36922353}
   - {fileID: 1206372546}
-  - {fileID: 1818903792}
-  - {fileID: 287965184}
+  - {fileID: 162385940}

@@ -124,7 +124,6 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(_moveSpeed);
         RotateControl();
         UpdatePowerState();
         playerState();
