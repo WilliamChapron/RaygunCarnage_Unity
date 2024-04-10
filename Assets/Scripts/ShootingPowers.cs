@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShootingPower : MonoBehaviour
 {
-
+    public int index;
     public virtual void OnCollision(Collider collider)
     {
     }
@@ -24,6 +25,11 @@ public class ShootingPower : MonoBehaviour
 
 public class ShootingBasic : ShootingPower
 {
+    private void Start()
+    {
+        this.index = 0;
+    }
+
     public override void OnCollision(Collider collider)
     {
         PerformDamage(collider);
@@ -33,14 +39,16 @@ public class ShootingBasic : ShootingPower
 
 public class ShootingPush : ShootingPower
 {
+    private void Start()
+    {
+        this.index = 1;
+    }
     public override void OnCollision(Collider collider)
     {
         //Debug.Log("Perform Shooting PUSH");
         Rigidbody rb = collider.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
-
-
             Transform trailObj = collider.gameObject.transform.Find("Trail");
             
             TrailRenderer trailRenderer = trailObj.GetComponent<TrailRenderer>();
@@ -91,11 +99,11 @@ public class ShootingPush : ShootingPower
 
 public class ShootingExplosion : ShootingPower
 {
-
     GameObject particlePrefab;
     public void Start()
     {
         particlePrefab = Resources.Load<GameObject>("Particule_02");
+        this.index = 2;
     }
 
 
@@ -127,7 +135,10 @@ public class ShootingExplosion : ShootingPower
 
 public class ShootingCrossWall : ShootingPower
 {
-
+    private void Start()
+    {
+        this.index = 3;
+    }
     public override void PerformExplosion(Vector3 endPoint)
     {
     }

@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
+
 public class Bonuses : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -18,21 +19,21 @@ public class Bonuses : MonoBehaviour
     public int PowerRandom = 0;
     public int RandomSpawn = 0;
 
-    Vector3 spot1 = new Vector3(50, 24, 3);
+    Vector3 spot1 = new Vector3(50, 2, 3);
 
-    Vector3 spot2 = new Vector3(50, 24, 16);
+    Vector3 spot2 = new Vector3(50, 2, 16);
 
-    Vector3 spot3 = new Vector3(64, 24, 28);
+    Vector3 spot3 = new Vector3(64, 2, 28);
 
-    Vector3 spot4 = new Vector3(37, 24, 28);
+    Vector3 spot4 = new Vector3(37, 2, 28);
 
-    Vector3 spot5 = new Vector3(32, 24, 64);
+    Vector3 spot5 = new Vector3(32, 2, 64);
 
-    Vector3 spot6 = new Vector3(68, 24, 59);
+    Vector3 spot6 = new Vector3(68, 2, 59);
 
-    Vector3 spot7 = new Vector3(73, 24, 5);
+    Vector3 spot7 = new Vector3(73, 2, 5);
 
-    Vector3 spot8 = new Vector3(35, 24, 5);
+    Vector3 spot8 = new Vector3(35, 2, 5);
 
     public void PowerUpSpawn()
     {
@@ -172,7 +173,6 @@ public class Bonuses : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (PowerUpInCooldown == false) 
         { 
         StartCoroutine(PowerUpCooldownIE());
@@ -188,25 +188,6 @@ public class Bonuses : MonoBehaviour
         PowerUpSpawn();
         PowerUpInCooldown = false;
         
-    }
-
-    private void OnTriggerEnter(Collider player)
-    {
-        if (gameObject == PowerUpOne)
-        {
-
-            Destroy(gameObject);
-        }
-        else if (gameObject == PowerUpTwo)
-        {
-
-            Destroy(gameObject);
-        }
-        else if (gameObject == PowerUpThree)
-        {
-
-            Destroy(gameObject);
-        }
     }
 }
 

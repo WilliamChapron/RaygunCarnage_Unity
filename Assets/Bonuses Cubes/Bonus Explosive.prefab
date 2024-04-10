@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 921966750444697976}
   - component: {fileID: 7055839927672664416}
   - component: {fileID: 2772031129800052872}
+  - component: {fileID: 8548965620433986351}
+  - component: {fileID: 7984368660988819204}
   m_Layer: 0
   m_Name: Bonus Explosive
   m_TagString: Bonus
@@ -118,3 +120,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728966d0d1b78cc46a9fc286bf564555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8548965620433986351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341578482950393304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a256e37a943536045b8d51f8920871ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerUpOne: {fileID: 0}
+  PowerUpTwo: {fileID: 0}
+  PowerUpThree: {fileID: 0}
+  PowerUpInCooldown: 0
+  PowerUpCooldownTime: 10
+  PowerRandom: 0
+  RandomSpawn: 0
+--- !u!114 &7984368660988819204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341578482950393304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aace0b5c10e35594bb49f7536414e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 3

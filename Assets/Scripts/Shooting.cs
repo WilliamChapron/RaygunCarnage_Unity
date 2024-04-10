@@ -25,6 +25,7 @@ public class Shooting : MonoBehaviour
     protected LineRenderer lineRenderer;
 
     public List<ShootingPower> shootingPowers;
+    private bool haveAshootingPower;
 
     public LayerMask layerCollide;
 
@@ -40,17 +41,10 @@ public class Shooting : MonoBehaviour
         // Shooting Components
         shootingPowers = new List<ShootingPower>();
 
-        //ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
-        //shootingPowers.Add(basicShooting);
+        ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
+        shootingPowers.Add(basicShooting);
 
-        ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
-        shootingPowers.Add(pushShooting);
-
-        //ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
-        //shootingPowers.Add(explosionShooting);
-
-        //ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
-        //shootingPowers.Add(crossWallShooting);
+        haveAshootingPower = false;
     }
 
     public void Update()
@@ -58,6 +52,11 @@ public class Shooting : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && canShoot && haveshoot)
         {
             FireLaser();
+            if (haveAshootingPower) 
+            {
+                goBackToNormalShoot();
+                haveAshootingPower=false;
+            }
             haveshoot = false;
             startTime = Time.time;  
         }
@@ -160,6 +159,35 @@ public class Shooting : MonoBehaviour
     protected void DisableLaser()
     {
         lineRenderer.enabled = false;
+    }
+
+    public void addPower(int Index)
+    {
+        Debug.Log("test");
+        shootingPowers.RemoveAt(0);
+        if (Index == 1)
+        {
+            ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
+            shootingPowers.Add(pushShooting);
+        }
+        else if (Index == 2) 
+        {
+            ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
+            shootingPowers.Add(explosionShooting);
+        }
+        else if (Index == 3)
+        {
+            ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
+            shootingPowers.Add(crossWallShooting);
+        }  
+        haveAshootingPower = true;
+    }
+
+    private void goBackToNormalShoot()
+    {
+        shootingPowers.RemoveAt(0);
+        ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
+        shootingPowers.Add(basicShooting);
     }
 
     private void reload()
