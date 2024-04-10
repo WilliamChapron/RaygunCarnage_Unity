@@ -15840,7 +15840,7 @@ PrefabInstance:
     - target: {fileID: 5909395398804372840, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50.9
+      value: 14.7
       objectReference: {fileID: 0}
     - target: {fileID: 5909395398804372840, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
@@ -15910,7 +15910,7 @@ PrefabInstance:
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
       propertyPath: layerCollide.m_Bits
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16449,7 +16449,7 @@ GameObject:
   - component: {fileID: 953095051}
   - component: {fileID: 953095050}
   m_Layer: 0
-  m_Name: TrailP2
+  m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26707,7 +26707,7 @@ GameObject:
   - component: {fileID: 1582175987}
   - component: {fileID: 1582175988}
   m_Layer: 0
-  m_Name: TrailP1
+  m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34548,7 +34548,7 @@ PrefabInstance:
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
       propertyPath: canShoot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
@@ -34558,7 +34558,7 @@ PrefabInstance:
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
       propertyPath: layerCollide.m_Bits
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
