@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using System.Net;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Analytics;
+using static Power;
+using System.Drawing;
 
 public class Shooting : MonoBehaviour
 {
+    public Slider slider;
+    private float shootcurrentTime;
+    private float startTime;
+    public bool haveshoot;
+    public float TimeToCharge;
+
     public Transform playerTransform;
     public bool canShoot;
 
@@ -14,9 +23,6 @@ public class Shooting : MonoBehaviour
     public float laserWidth = 0.1f;
     public Material laserMaterial;
     protected LineRenderer lineRenderer;
-
-    public float timeBetweenShots = 0.5f; // In seconds
-    private float timeSinceLastShot;
 
     public List<ShootingPower> shootingPowers;
 
@@ -39,16 +45,23 @@ public class Shooting : MonoBehaviour
 
         ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
         shootingPowers.Add(explosionShooting);
+
+        haveshoot = true;
+        slider.value = 1;
+        //slider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = new Color(233f / 255f, 79f / 255f, 55f / 255f);
     }
 
     public void Update()
     {
-        timeSinceLastShot += Time.deltaTime;
-
-        if (Input.GetButtonDown("Fire1") && canShoot && timeSinceLastShot >= timeBetweenShots)
+        if (Input.GetButtonDown("Fire1") && canShoot && haveshoot)
         {
-            timeSinceLastShot = 0f;
             FireLaser();
+            haveshoot = false;
+            startTime = Time.time;  
+        }
+        else if (!haveshoot) 
+        {
+            reload();
         }
     }
 
@@ -75,8 +88,6 @@ public class Shooting : MonoBehaviour
 
 
         shootingPowers[0].PerformExplosion(endPoint);
-
-
 
     }
 
@@ -121,6 +132,21 @@ public class Shooting : MonoBehaviour
     protected void DisableLaser()
     {
         lineRenderer.enabled = false;
+    }
+
+    private void reload()
+    {
+        if (shootcurrentTime < TimeToCharge)
+        {
+            shootcurrentTime = Time.time - startTime;
+            slider.value = (shootcurrentTime * 100f / TimeToCharge) / 100f;
+        }
+        else
+        {
+            slider.value = 1;
+            shootcurrentTime = 0.0f;
+            haveshoot = true;
+        }
     }
 }
 

@@ -19,11 +19,7 @@ public class ShootingPower : MonoBehaviour
 
     public virtual void PerformDamage(Collider collider)
     {
-        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
-        if (healthComponent != null)
-        {
-            healthComponent.TakeDamage(200);
-        }
+    
     }
 }
 

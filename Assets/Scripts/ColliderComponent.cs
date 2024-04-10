@@ -22,12 +22,6 @@ public class ColliderComponent : MonoBehaviour
         if (other.CompareTag("PlayerControllable") && other.gameObject.name != playerName)
         {
             Debug.Log(name + " a une Collision avec : " + other.gameObject.name);
-            HealthComponent healthComponent = other.gameObject.GetComponent<HealthComponent>();
-            if (healthComponent != null)
-            {
-                healthComponent.TakeDamage(200);
-                Debug.Log("Prend Dommage a cause particule");
-            }
         }
     }
 
