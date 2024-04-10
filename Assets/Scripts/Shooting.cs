@@ -163,7 +163,6 @@ public class Shooting : MonoBehaviour
 
     public void addPower(int Index)
     {
-        Debug.Log("test");
         shootingPowers.RemoveAt(0);
         if (Index == 1)
         {

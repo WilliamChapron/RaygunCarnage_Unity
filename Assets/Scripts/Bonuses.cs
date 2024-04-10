@@ -35,141 +35,66 @@ public class Bonuses : MonoBehaviour
 
     Vector3 spot8 = new Vector3(35, 2, 5);
 
+    private void InCube(GameObject thisPower, Vector3 thisSpot)
+    {
+        if (thisPower != null)
+        {
+            GameObject bonusInstance = Instantiate(thisPower, thisSpot, Quaternion.identity);
+            bonusInstance.SetActive(true);
+        }
+    }
+
     public void PowerUpSpawn()
     {
-        if (PowerRandom == 0)
+
+        GameObject powerUpPrefab = null;
+        Vector3 spawnPosition = Vector3.zero;
+
+        switch (PowerRandom)
         {
-            if (RandomSpawn == 1)
-            {
-                Instantiate(PowerUpOne, spot1, Quaternion.identity);
-                return;
-            }
-            else if (RandomSpawn == 2)
-            {
-                Instantiate(PowerUpOne, spot2, Quaternion.identity);
-                return;
-            }
-            else if (RandomSpawn == 3)
-            {
-                Instantiate(PowerUpOne, spot3, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 4)
-            {
-                Instantiate(PowerUpOne, spot4, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 5)
-            {
-                Instantiate(PowerUpOne, spot5, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 6)
-            {
-                Instantiate(PowerUpOne, spot6, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 7)
-            {
-                Instantiate(PowerUpOne, spot7, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 8)
-            {
-                Instantiate(PowerUpOne, spot8, Quaternion.identity);
-                return;
-            }
+            case 0:
+                powerUpPrefab = PowerUpOne;
+                break;
+            case 1:
+                powerUpPrefab = PowerUpTwo;
+                break;
+            case 2:
+                powerUpPrefab = PowerUpThree;
+                break;
+        }
+
+        switch (RandomSpawn)
+        {
+            case 1:
+                spawnPosition = spot1;
+                break;
+            case 2:
+                spawnPosition = spot2;
+                break;
+            case 3:
+                spawnPosition = spot3;
+                break;
+            case 4:
+                spawnPosition = spot4;
+                break;
+            case 5:
+                spawnPosition = spot5;
+                break;
+            case 6:
+                spawnPosition = spot6;
+                break;
+            case 7:
+                spawnPosition = spot7;
+                break;
+            case 8:
+                spawnPosition = spot8;
+                break;
 
         }
-        else if (PowerRandom == 1)
-        {
-            if (RandomSpawn == 1)
-            {
-                Instantiate(PowerUpTwo, spot1, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 2)
-            {
-                Instantiate(PowerUpTwo, spot2, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 3)
-            {
-                Instantiate(PowerUpTwo, spot3, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 4)
-            {
-                Instantiate(PowerUpTwo, spot4, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 5)
-            {
-                Instantiate(PowerUpTwo, spot5, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 6)
-            {
-                Instantiate(PowerUpTwo, spot6, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 7)
-            {
-                Instantiate(PowerUpTwo, spot7, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 8)
-            {
-                Instantiate(PowerUpTwo, spot8, Quaternion.identity);
-                return;
-            }
-        }
-        else if (PowerRandom == 2)
-        {
-            if (RandomSpawn == 1)
-            {
-                Instantiate(PowerUpThree, spot1, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 2)
-            {
-                Instantiate(PowerUpThree, spot2, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 3)
-            {
-                Instantiate(PowerUpThree, spot3, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 4)
-            {
-                Instantiate(PowerUpThree, spot4, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 5)
-            {
-                Instantiate(PowerUpThree, spot5, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 6)
-            {
-                Instantiate(PowerUpThree, spot6, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 7)
-            {
-                Instantiate(PowerUpThree, spot7, Quaternion.identity);
-                return;
-            }
-            else if(RandomSpawn == 8)
-            {
-                Instantiate(PowerUpThree, spot8, Quaternion.identity);
-                return;
-            }
-        }
-        return;
+
+        InCube(powerUpPrefab, spawnPosition);
     }
-    
+
     // Update is called once per frame
     void Update()
     {
