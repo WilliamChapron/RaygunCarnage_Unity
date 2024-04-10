@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using static Power;
-using System.Drawing;
 
 public class Shooting : MonoBehaviour
 {
@@ -43,14 +42,14 @@ public class Shooting : MonoBehaviour
         //ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
         //shootingPowers.Add(basicShooting);
 
-        ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
-        shootingPowers.Add(pushShooting);
+        //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
+        //shootingPowers.Add(pushShooting);
 
         //ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
         //shootingPowers.Add(explosionShooting);
 
-        //ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
-        //shootingPowers.Add(crossWallShooting);
+        ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
+        shootingPowers.Add(crossWallShooting);
     }
 
     public void Update()
@@ -65,6 +64,23 @@ public class Shooting : MonoBehaviour
         {
             reload();
         }
+    }
+
+    void CreateDynamicLight(Vector3 position)
+    {
+        // Créer une lumière dynamique
+        GameObject lightObject = new GameObject("DynamicLight");
+        Light lightComponent = lightObject.AddComponent<Light>();
+
+        lightComponent.type = LightType.Point;
+        lightComponent.range = 50f;
+        lightComponent.intensity = 10f;
+        lightComponent.color = UnityEngine.Color.blue;
+
+        lightObject.transform.position = position;
+
+        // Supprimer la lumière après un certain délai
+        Destroy(lightObject, 1f);
     }
 
     private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
@@ -82,6 +98,8 @@ public class Shooting : MonoBehaviour
                 RaycastHit[] hits = Physics.RaycastAll(endPoint, transform.forward, 100000000000000000f);
                 foreach (RaycastHit oneHit in hits)
                 {
+                    CreateDynamicLight(oneHit.point);
+                    Debug.Log("Put a light on : " + oneHit.collider.gameObject.name);
                     if (oneHit.collider.gameObject.CompareTag("PlayerControllable"))
                     {
                         endPoint = oneHit.point;

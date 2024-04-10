@@ -38,13 +38,20 @@ public class ShootingPush : ShootingPower
         //Debug.Log("Perform Shooting PUSH");
         Rigidbody rb = collider.gameObject.GetComponent<Rigidbody>();
 
-        Transform trailObj = collider.gameObject.transform.Find("Trail");
-        TrailRenderer trailRenderer = trailObj.GetComponent<TrailRenderer>();
 
-        Color originalColor = trailRenderer.startColor;
-        trailRenderer.emitting = true;
+        Transform trailObj = null;
+        TrailRenderer trailRenderer = null;
+        Color originalColor = Color.white;
 
-        if (rb != null)
+        if (collider.gameObject.CompareTag("PlayerControllable")) {
+            trailObj = collider.gameObject.transform.Find("Trail");
+            trailRenderer = trailObj.GetComponent<TrailRenderer>();
+            originalColor = trailRenderer.startColor;
+            trailRenderer.emitting = true;
+        }
+        
+
+        if (rb != null && trailRenderer != null)
         {
             StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position, trailRenderer));
         }
