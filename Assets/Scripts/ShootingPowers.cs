@@ -97,6 +97,7 @@ public class ShootingExplosion : ShootingPower
     public override void PerformExplosion(Vector3 endPoint)
     {
         //Debug.Log("Perform Shooting Explode");
+
         GameObject particleObject = Instantiate(particlePrefab, endPoint, Quaternion.identity);
         ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
 

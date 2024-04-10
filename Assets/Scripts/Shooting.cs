@@ -82,9 +82,18 @@ public class Shooting : MonoBehaviour
         Destroy(lightObject, 2f);
     }
 
+    private void CreateParticule(Vector3 position)
+    {
+        GameObject particlePrefab = Resources.Load<GameObject>("Particule_05");
+        GameObject particleObject = Instantiate(particlePrefab, position, Quaternion.identity);
+
+        Destroy(particleObject, 2f);
+    }
+
     private void PerformObjectTouch(RaycastHit hit)
     {
         CreateDynamicLight(hit.point);
+        CreateParticule(hit.point);
         Renderer renderer = hit.collider.GetComponent<Renderer>();
 
         if (renderer != null)
@@ -95,6 +104,7 @@ public class Shooting : MonoBehaviour
             material.color = Color.black;
             material.SetFloat("_Glossiness", 0.2f);
             renderer.material = material;
+
             StartCoroutine(ResetMaterial(oldMaterial, renderer));
         }
     }
@@ -103,47 +113,10 @@ public class Shooting : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        Debug.Log("Reset le material de l'objet : " + renderer.gameObject.name);
+
         renderer.material = material;
     }
-    //private bool FindObjectInGameMap(RaycastHit oneHit)
-    //{
-    //    // Find parent in hierarchy that have MapTag 
-    //    Transform objectTransform = oneHit.collider.transform;
-    //    bool isChildOfMapObject = false;
-
-    //    while (objectTransform != null)
-    //    {
-    //        //Debug.Log("Checking object: " + objectTransform.name);
-
-
-
-    //        if (objectTransform.parent != null)
-    //        {
-    //            if (objectTransform.parent.CompareTag("Map"))
-    //            {
-    //                Debug.Log("Found object with Map tag: " + oneHit.collider.gameObject.name);
-    //                isChildOfMapObject = true;
-    //                break;
-    //            }
-    //            Debug.Log("One parent find : " + objectTransform.parent.name);
-    //            objectTransform = objectTransform.parent;
-    //        }
-    //        else
-    //        {
-    //            break;
-    //        }
-    //    }
-
-    //    if (isChildOfMapObject)
-    //    {
-    //        //Debug.Log("Object is a child of an object with Map tag.");
-    //        Debug.Log("Found object with Map tag: " + oneHit.collider.gameObject.name);
-    //        return true;
-    //    }
-
-    //    Debug.Log("Object is not a child of an object with Map tag." + oneHit.collider.gameObject.name);
-    //    return false;
-    //}
 
     private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
@@ -157,13 +130,13 @@ public class Shooting : MonoBehaviour
         {
             if (shootingPowers[0].GetType() == typeof(ShootingCrossWall))
             {
+                if (hit.collider.gameObject.CompareTag("Obstacle"))
+                {
+                    PerformObjectTouch(hit);
+                }
                 RaycastHit[] hits = Physics.RaycastAll(endPoint, transform.forward, 100000000000000000f);
                 foreach (RaycastHit oneHit in hits)
                 {
-                    if (hit.collider.gameObject.CompareTag("Obstacle"))
-                    {
-                        PerformObjectTouch(hit); 
-                    }
                     if (oneHit.collider.gameObject.CompareTag("Obstacle"))
                     {
                         PerformObjectTouch(oneHit);
