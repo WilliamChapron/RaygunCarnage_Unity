@@ -9,23 +9,24 @@ public class Shooting : MonoBehaviour
     public Transform playerTransform;
     public float projectileSpeed = 30f;
 
-    PlayerInput input;
+    PlayerControl input;
 
     void Awake()
     {
-        input = new PlayerInput();
+        input = new PlayerControl();
 
-        input.CharacterControls.Shoot.started += _ => Shoot();
+        input.Player1Controls.Shoot.performed += _ => Shoot();
+        input.Player2Controls.Shoot.performed += _ => Shoot();
     }
 
     void OnEnable()
     {
-        input.CharacterControls.Enable();
+        input.Enable();
     }
 
     void OnDisable()
     {
-        input.CharacterControls.Disable();
+        input.Disable();
     }
 
     void Shoot()

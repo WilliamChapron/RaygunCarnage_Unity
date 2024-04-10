@@ -1,27 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player2Controller : MonoBehaviour
 {
     public float speed = 5.0f;
     Animator animator;
     int isRunningHash;
-    PlayerInput input;
+    PlayerControl input;
     Vector2 currentMovement;
     Vector2 currentAim;
 
+
+
     void Awake()
     {
-        input = new PlayerInput();
 
-        input.CharacterControls.Movement.performed += ctx =>
+        input = new PlayerControl();
+
+        input.Player2Controls.Movement.performed += ctx =>
         {
             currentMovement = ctx.ReadValue<Vector2>();
         };
 
-        input.CharacterControls.Aim.performed += ctx =>
+        input.Player2Controls.Aim.performed += ctx =>
         {
             currentAim = ctx.ReadValue<Vector2>();
         };
@@ -69,11 +71,17 @@ public class Player2Controller : MonoBehaviour
 
     void OnEnable()
     {
-        input.CharacterControls.Enable();
+        input.Player2Controls.Enable();
     }
 
     void OnDisable()
     {
-        input.CharacterControls.Disable();
+        input.Player2Controls.Disable();
     }
+
+    public void SetInputVector(Vector2 input)
+    {
+        currentMovement = input;
+    }
+
 }
