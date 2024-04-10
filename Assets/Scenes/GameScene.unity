@@ -16220,7 +16220,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8007981220244696858, guid: 91e287d61f8983846a9d32c8e1c15468, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5909395398804372840, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
@@ -34940,7 +34941,7 @@ PrefabInstance:
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
       propertyPath: canShoot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
@@ -34959,11 +34960,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
-      propertyPath: canShoot
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
-        type: 3}
       propertyPath: _maxLaserRange
       value: 20
       objectReference: {fileID: 0}
@@ -34973,7 +34969,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8007981220244696858, guid: 91e287d61f8983846a9d32c8e1c15468, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5909395398804372840, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}

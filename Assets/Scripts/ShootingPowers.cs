@@ -18,15 +18,6 @@ public class ShootingPower : MonoBehaviour
 
     public virtual void PerformDamage(Collider collider)
     {
-        HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
-        if (healthComponent != null)
-        {
-            healthComponent.TakeDamage(200);
-        }
-        else
-        {
-            Debug.Log(collider.gameObject.name + " N'a pas de health component ! ");
-        }
     }
 }
 
@@ -53,17 +44,24 @@ public class ShootingPush : ShootingPower
             Transform trailObj = collider.gameObject.transform.Find("Trail");
             
             TrailRenderer trailRenderer = trailObj.GetComponent<TrailRenderer>();
+
+
+            Color originalColor = trailRenderer.startColor;
+            // Définir la nouvelle couleur (rouge) pour le TrailRenderer
+            Color newColor = Color.red;
+            trailRenderer.startColor = newColor;
+            trailRenderer.endColor = newColor;
+
             trailRenderer.emitting = true;
             //Debug.Log(trailTransform.name);
 
-            StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position));
+            StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position, trailRenderer, originalColor));
 
-            trailRenderer.emitting = false;
         }
         PerformDamage(collider);
     }
 
-    private IEnumerator ApplyForceOverDuration(Rigidbody rb, Vector3 targetPosition)
+    private IEnumerator ApplyForceOverDuration(Rigidbody rb, Vector3 targetPosition, TrailRenderer trailRenderer, Color originalColor)
     {
         float totalForceMagnitude = 20000.0f;
         float duration = 1.0f;
@@ -79,6 +77,10 @@ public class ShootingPush : ShootingPower
             rb.AddForce(forceDirection * forceMagnitudePerIteration, ForceMode.Force);
             yield return new WaitForSeconds(duration / numIterations);
         }
+
+        trailRenderer.emitting = false;
+        trailRenderer.startColor = originalColor;
+        trailRenderer.endColor = originalColor;
     }
 
     public override void PerformExplosion(Vector3 endPoint)
