@@ -68,20 +68,82 @@ public class Shooting : MonoBehaviour
 
     void CreateDynamicLight(Vector3 position)
     {
-        // Créer une lumière dynamique
         GameObject lightObject = new GameObject("DynamicLight");
         Light lightComponent = lightObject.AddComponent<Light>();
 
         lightComponent.type = LightType.Point;
-        lightComponent.range = 50f;
-        lightComponent.intensity = 10f;
-        lightComponent.color = UnityEngine.Color.blue;
+        lightComponent.color = Color.white;
+        lightComponent.range = 30f;
+        lightComponent.intensity = 30f;
 
-        lightObject.transform.position = position;
 
-        // Supprimer la lumière après un certain délai
-        Destroy(lightObject, 1f);
+        lightObject.transform.position = new Vector3(position.x, position.y, position.z);
+
+        Destroy(lightObject, 2f);
     }
+
+    private void PerformObjectTouch(RaycastHit hit)
+    {
+        CreateDynamicLight(hit.point);
+        Renderer renderer = hit.collider.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            Material material = renderer.material;
+            Material oldMaterial = new Material(material);
+            material.SetFloat("_Metallic", 0.5f);
+            material.color = Color.black;
+            material.SetFloat("_Glossiness", 0.2f);
+            renderer.material = material;
+            StartCoroutine(ResetMaterial(oldMaterial, renderer));
+        }
+    }
+
+    private IEnumerator ResetMaterial(Material material, Renderer renderer)
+    {
+        yield return new WaitForSeconds(2f);
+
+        renderer.material = material;
+    }
+    //private bool FindObjectInGameMap(RaycastHit oneHit)
+    //{
+    //    // Find parent in hierarchy that have MapTag 
+    //    Transform objectTransform = oneHit.collider.transform;
+    //    bool isChildOfMapObject = false;
+
+    //    while (objectTransform != null)
+    //    {
+    //        //Debug.Log("Checking object: " + objectTransform.name);
+
+
+
+    //        if (objectTransform.parent != null)
+    //        {
+    //            if (objectTransform.parent.CompareTag("Map"))
+    //            {
+    //                Debug.Log("Found object with Map tag: " + oneHit.collider.gameObject.name);
+    //                isChildOfMapObject = true;
+    //                break;
+    //            }
+    //            Debug.Log("One parent find : " + objectTransform.parent.name);
+    //            objectTransform = objectTransform.parent;
+    //        }
+    //        else
+    //        {
+    //            break;
+    //        }
+    //    }
+
+    //    if (isChildOfMapObject)
+    //    {
+    //        //Debug.Log("Object is a child of an object with Map tag.");
+    //        Debug.Log("Found object with Map tag: " + oneHit.collider.gameObject.name);
+    //        return true;
+    //    }
+
+    //    Debug.Log("Object is not a child of an object with Map tag." + oneHit.collider.gameObject.name);
+    //    return false;
+    //}
 
     private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
@@ -98,8 +160,15 @@ public class Shooting : MonoBehaviour
                 RaycastHit[] hits = Physics.RaycastAll(endPoint, transform.forward, 100000000000000000f);
                 foreach (RaycastHit oneHit in hits)
                 {
-                    CreateDynamicLight(oneHit.point);
-                    Debug.Log("Put a light on : " + oneHit.collider.gameObject.name);
+                    if (hit.collider.gameObject.CompareTag("Obstacle"))
+                    {
+                        PerformObjectTouch(hit); 
+                    }
+                    if (oneHit.collider.gameObject.CompareTag("Obstacle"))
+                    {
+                        PerformObjectTouch(oneHit);
+                    };
+
                     if (oneHit.collider.gameObject.CompareTag("PlayerControllable"))
                     {
                         endPoint = oneHit.point;
