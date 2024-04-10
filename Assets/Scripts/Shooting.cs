@@ -37,8 +37,11 @@ public class Shooting : MonoBehaviour
         //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
         //shootingPowers.Add(pushShooting);
 
-        ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
-        shootingPowers.Add(explosionShooting);
+        //ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
+        //shootingPowers.Add(explosionShooting);
+
+        ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
+        shootingPowers.Add(crossWallShooting);
     }
 
     public void Update()
@@ -60,24 +63,33 @@ public class Shooting : MonoBehaviour
 
         Collider collider = hit.collider;
 
-
         if (collider != null)
         {
-            //Debug.Log("Objet touché : " + collider.gameObject.name);
-            shootingPowers[0].OnCollision(hit.collider);
+            if (shootingPowers[0].GetType() == typeof(ShootingCrossWall))
+            {
+                RaycastHit[] hits = Physics.RaycastAll(endPoint, transform.forward, 100000000000000000f);
+                foreach (RaycastHit oneHit in hits)
+                {
+                    if (oneHit.collider.gameObject.CompareTag("PlayerControllable"))
+                    {
+                        endPoint = oneHit.point;
+                        shootingPowers[0].OnCollision(oneHit.collider);
+                        break;
+                    }
+                    endPoint = oneHit.point;
+                }
+            }
+            else
+            {
+                shootingPowers[0].OnCollision(hit.collider);
+            }  
         }
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
         lineRenderer.enabled = true;
-
         Invoke("DisableLaser", 0.1f);
-
-
         shootingPowers[0].PerformExplosion(endPoint);
-
-
-
     }
 
 
@@ -86,13 +98,19 @@ public class Shooting : MonoBehaviour
         //Debug.Log("NO RAYCAST !!!!");
         endPoint = startPoint + transform.forward * _maxLaserRange;
 
+        if (shootingPowers[0].GetType() == typeof(ShootingCrossWall))
+        {
+            RaycastHit[] hits = Physics.RaycastAll(endPoint, transform.forward, 100000000000000000f);
+            foreach (RaycastHit oneHit in hits)
+            {
+                endPoint = oneHit.point;
+            }
+        }
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
         lineRenderer.enabled = true;
 
         Invoke("DisableLaser", 0.1f);
-
-
         //Debug.Log("We touch nothing but we perform Explode");
         shootingPowers[0].PerformExplosion(endPoint);
     }
