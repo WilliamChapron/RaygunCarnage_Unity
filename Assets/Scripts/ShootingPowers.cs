@@ -37,31 +37,21 @@ public class ShootingPush : ShootingPower
     {
         //Debug.Log("Perform Shooting PUSH");
         Rigidbody rb = collider.gameObject.GetComponent<Rigidbody>();
+
+        Transform trailObj = collider.gameObject.transform.Find("Trail");
+        TrailRenderer trailRenderer = trailObj.GetComponent<TrailRenderer>();
+
+        Color originalColor = trailRenderer.startColor;
+        trailRenderer.emitting = true;
+
         if (rb != null)
         {
-
-
-            Transform trailObj = collider.gameObject.transform.Find("Trail");
-            
-            TrailRenderer trailRenderer = trailObj.GetComponent<TrailRenderer>();
-
-
-            Color originalColor = trailRenderer.startColor;
-            // Définir la nouvelle couleur (rouge) pour le TrailRenderer
-            Color newColor = Color.red;
-            trailRenderer.startColor = newColor;
-            trailRenderer.endColor = newColor;
-
-            trailRenderer.emitting = true;
-            //Debug.Log(trailTransform.name);
-
-            StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position, trailRenderer, originalColor));
-
+            StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position, trailRenderer));
         }
         PerformDamage(collider);
     }
 
-    private IEnumerator ApplyForceOverDuration(Rigidbody rb, Vector3 targetPosition, TrailRenderer trailRenderer, Color originalColor)
+    private IEnumerator ApplyForceOverDuration(Rigidbody rb, Vector3 targetPosition, TrailRenderer trailRenderer)
     {
         float totalForceMagnitude = 20000.0f;
         float duration = 1.0f;
@@ -79,8 +69,6 @@ public class ShootingPush : ShootingPower
         }
 
         trailRenderer.emitting = false;
-        trailRenderer.startColor = originalColor;
-        trailRenderer.endColor = originalColor;
     }
 
     public override void PerformExplosion(Vector3 endPoint)
