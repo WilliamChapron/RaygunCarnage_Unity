@@ -31,6 +31,15 @@ public class ShootingPower : MonoBehaviour
 }
 
 
+public class ShootingBasic : ShootingPower
+{
+    public override void OnCollision(Collider collider)
+    {
+        PerformDamage(collider);
+    }
+}
+
+
 public class ShootingPush : ShootingPower
 {
     public override void OnCollision(Collider collider)
@@ -39,7 +48,17 @@ public class ShootingPush : ShootingPower
         Rigidbody rb = collider.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
+
+
+            Transform trailObj = collider.gameObject.transform.Find("Trail");
+            
+            TrailRenderer trailRenderer = trailObj.GetComponent<TrailRenderer>();
+            trailRenderer.emitting = true;
+            //Debug.Log(trailTransform.name);
+
             StartCoroutine(ApplyForceOverDuration(rb, collider.gameObject.transform.position));
+
+            trailRenderer.emitting = false;
         }
         PerformDamage(collider);
     }
@@ -56,7 +75,7 @@ public class ShootingPush : ShootingPower
 
         for (int i = 0; i < numIterations; i++)
         {
-            Debug.Log("Apply force");
+            //Debug.Log("Apply force");
             rb.AddForce(forceDirection * forceMagnitudePerIteration, ForceMode.Force);
             yield return new WaitForSeconds(duration / numIterations);
         }

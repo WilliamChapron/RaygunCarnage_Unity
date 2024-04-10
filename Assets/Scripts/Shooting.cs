@@ -34,14 +34,17 @@ public class Shooting : MonoBehaviour
         // Shooting Components
         shootingPowers = new List<ShootingPower>();
 
-        //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
-        //shootingPowers.Add(pushShooting);
+        //ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
+        //shootingPowers.Add(basicShooting);
+
+        ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
+        shootingPowers.Add(pushShooting);
 
         //ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
         //shootingPowers.Add(explosionShooting);
 
-        ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
-        shootingPowers.Add(crossWallShooting);
+        //ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
+        //shootingPowers.Add(crossWallShooting);
     }
 
     public void Update()
@@ -81,15 +84,19 @@ public class Shooting : MonoBehaviour
             }
             else
             {
+                Debug.Log("One collide push");
                 shootingPowers[0].OnCollision(hit.collider);
-            }  
+            }
         }
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
         lineRenderer.enabled = true;
         Invoke("DisableLaser", 0.1f);
+
+
         shootingPowers[0].PerformExplosion(endPoint);
+
     }
 
 
@@ -106,13 +113,18 @@ public class Shooting : MonoBehaviour
                 endPoint = oneHit.point;
             }
         }
+
+
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
         lineRenderer.enabled = true;
 
         Invoke("DisableLaser", 0.1f);
         //Debug.Log("We touch nothing but we perform Explode");
+
         shootingPowers[0].PerformExplosion(endPoint);
+
+
     }
 
     protected void FireLaser()
