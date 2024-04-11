@@ -27,6 +27,7 @@ public class Shooting : MonoBehaviour
     private bool haveAshootingPower;
 
     public LayerMask layerCollide;
+    public bool playerShoot;
 
     public void Start()
     {
@@ -56,18 +57,7 @@ public class Shooting : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canShoot && haveshoot)
-        {
-            FireLaser();
-            if (haveAshootingPower) 
-            {
-                goBackToNormalShoot();
-                haveAshootingPower=false;
-            }
-            haveshoot = false;
-            startTime = Time.time;  
-        }
-        else if (!haveshoot) 
+        if (!haveshoot) 
         {
             reload();
         }
@@ -203,24 +193,33 @@ public class Shooting : MonoBehaviour
 
     }
 
-    protected void FireLaser()
+    public void FireLaser()
     {
-        RaycastHit hit;
-        Vector3 endPoint = Vector3.zero;
-
-        Vector3 startPoint = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z);
-
-        bool isRaycast = Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange, layerCollide);
-
-        if (isRaycast)
+        if (canShoot && haveshoot)
         {
-            PerformRaycast(hit, startPoint, endPoint);
-        }
-        else
-        {
-            PerformNoRaycast(hit, startPoint, endPoint);
-        }
+            RaycastHit hit;
+            Vector3 endPoint = Vector3.zero;
 
+            Vector3 startPoint = new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z);
+
+            bool isRaycast = Physics.Raycast(startPoint, transform.forward, out hit, _maxLaserRange, layerCollide);
+
+            if (isRaycast)
+            {
+                PerformRaycast(hit, startPoint, endPoint);
+            }
+            else
+            {
+                PerformNoRaycast(hit, startPoint, endPoint);
+            }
+            if (haveAshootingPower)
+            {
+                goBackToNormalShoot();
+                haveAshootingPower = false;
+            }
+            haveshoot = false;
+            startTime = Time.time;
+        }
 
     }
 

@@ -20,6 +20,11 @@ public class Player1Controller : PlayerController
         dashPower();
     }
 
+    private void shoot()
+    {
+        shootingAction();
+    }
+
     void Awake()
     {
 
@@ -28,6 +33,7 @@ public class Player1Controller : PlayerController
         input.Player1Controls.Movement.performed += ctx =>
         {
             currentMovement = ctx.ReadValue<Vector2>();
+            SetPlayerState(PlayerState.Running);
         };
 
         input.Player1Controls.Aim.performed += ctx =>
@@ -38,11 +44,18 @@ public class Player1Controller : PlayerController
         input.Player1Controls.Shield.performed += ctx =>
         {
              Shield();
+             SetPlayerState(PlayerState.Shield);
         };
 
         input.Player1Controls.Dash.performed += ctx =>
         {
             Dash();
+            SetPlayerState(PlayerState.Dash);
+        };
+
+        input.Player1Controls.Shoot.performed += ctx =>
+        {
+            shoot();
         };
     }
 

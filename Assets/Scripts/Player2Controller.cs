@@ -20,6 +20,11 @@ public class Player2Controller : PlayerController
         dashPower();
     }
 
+    private void shoot()
+    {
+        shootingAction();
+    }
+
     void Awake()
     {
 
@@ -28,6 +33,7 @@ public class Player2Controller : PlayerController
         input.Player2Controls.Movement.performed += ctx =>
         {
             currentMovement = ctx.ReadValue<Vector2>();
+            SetPlayerState(PlayerState.Running);
         };
 
         input.Player2Controls.Aim.performed += ctx =>
@@ -38,11 +44,18 @@ public class Player2Controller : PlayerController
         input.Player2Controls.Shield.performed += ctx =>
         {
             Shield();
+            SetPlayerState(PlayerState.Shield);
         };
 
         input.Player2Controls.Dash.performed += ctx =>
         {
             Dash();
+            SetPlayerState(PlayerState.Dash);
+        };
+
+        input.Player2Controls.Shoot.performed += ctx =>
+        {
+            shoot();
         };
     }
 
@@ -64,6 +77,7 @@ public class Player2Controller : PlayerController
             movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
             transform.Translate(movementDirection.normalized * Time.deltaTime * _moveSpeed, Space.World);
         }
+
     }
 
     void Update()

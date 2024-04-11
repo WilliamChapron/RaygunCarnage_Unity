@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float _rotationSpeed = 600f;
 
     private List<Power> listOfPower;
-
+    
     public enum PlayerState
     {
         Idle,
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         SetPlayerState(PlayerState.Idle);
-        //animator.SetBool(Animator.StringToHash("isRunning"), false);
+        animator.SetBool(Animator.StringToHash("isRunning"), false);
         listOfPower = new List<Power>();
         Shield shield = GetComponent<Shield>();
         listOfPower.Add(shield);
@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
 
     public void playerState()
     {
-        animator = GetComponent<Animator>();
         switch (_currentState)
         {
             case PlayerState.Idle:
@@ -50,10 +49,10 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool(Animator.StringToHash("isRunning"), true);
                 break;
             case PlayerState.Dead:
-                 Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
+                Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
                 animator.SetBool(Animator.StringToHash("death"), false);
                 RoundSystem.End = true;
-                 break;
+                break;
         }
     }
 
@@ -80,6 +79,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void shootingAction()
+    {
+        Shooting myShooting = GetComponent<Shooting>();
+        myShooting.FireLaser();
+    }
+
     public void UpdatePowerState()
     {
         for (int i = 0; i < listOfPower.Count; i++)
@@ -90,9 +95,5 @@ public class PlayerController : MonoBehaviour
             }
             listOfPower[i].powerState();
         }
-    }
-    void Update()
-    {
-        
     }
 }
