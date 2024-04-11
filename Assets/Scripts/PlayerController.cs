@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         SetPlayerState(PlayerState.Idle);
+        //animator.SetBool(Animator.StringToHash("isRunning"), false);
         listOfPower = new List<Power>();
         Shield shield = GetComponent<Shield>();
         listOfPower.Add(shield);
@@ -31,21 +32,27 @@ public class PlayerController : MonoBehaviour
         listOfPower.Add(dash);
     }
 
-    private void playerState()
+    public void playerState()
     {
+        animator = GetComponent<Animator>();
         switch (_currentState)
         {
             case PlayerState.Idle:
+                animator.SetBool(Animator.StringToHash("isRunning"), false);
                 break;
             case PlayerState.Running:
+                animator.SetBool(Animator.StringToHash("isRunning"), true);
                 break;
             case PlayerState.Shield:
+                animator.SetBool(Animator.StringToHash("isRunning"), false);
                 break;
             case PlayerState.Dash:
+                animator.SetBool(Animator.StringToHash("isRunning"), true);
                 break;
             case PlayerState.Dead:
                  Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
-                 RoundSystem.End = true;
+                animator.SetBool(Animator.StringToHash("death"), false);
+                RoundSystem.End = true;
                  break;
         }
     }
@@ -55,24 +62,25 @@ public class PlayerController : MonoBehaviour
         _currentState = newState;
     }
 
-    private void Control(Power power)
+    public void shieldPower()
     {
         if (_currentState != PlayerState.Shield)
         {
-            if (power == listOfPower[0] && power._powerState != Power.PowerState.Using)
-            {
-                SetPlayerState(PlayerState.Shield);
-                power.LunchPower();
-            }
-            else if (power == listOfPower[1])
-            {
-                SetPlayerState(PlayerState.Dash);
-                power.LunchPower();
-            }
-        } 
-    }  
+            SetPlayerState(PlayerState.Shield);
+            listOfPower[0].LunchPower();
+        }
+    }
 
-    private void UpdatePowerState()
+    public void dashPower()
+    {
+        if (_currentState != PlayerState.Dash)
+        {
+            SetPlayerState(PlayerState.Dash);
+            listOfPower[1].LunchPower();
+        }
+    }
+
+    public void UpdatePowerState()
     {
         for (int i = 0; i < listOfPower.Count; i++)
         {
@@ -80,14 +88,11 @@ public class PlayerController : MonoBehaviour
             {
                 SetPlayerState(PlayerState.Idle);
             }
-            Control(listOfPower[i]);
             listOfPower[i].powerState();
         }
     }
-
-    public void Update()
+    void Update()
     {
-        UpdatePowerState();
-        playerState();
+        
     }
 }

@@ -19561,6 +19561,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1807807269}
+    - targetCorrespondingSourceObject: {fileID: 6433870779749738450, guid: 91e287d61f8983846a9d32c8e1c15468,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1807807275}
   m_SourcePrefab: {fileID: 100100000, guid: 91e287d61f8983846a9d32c8e1c15468, type: 3}
 --- !u!4 &926809995 stripped
 Transform:
@@ -37924,6 +37928,22 @@ MonoBehaviour:
   DashTravelTime: 0.3
   PC: {fileID: 1807807267}
   tr: {fileID: 1582175988}
+--- !u!114 &1807807275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807807262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b0926be3bd9564fbeada04bbde6b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  _moveSpeed: 5
+  _rotationSpeed: 600
+  _currentState: 0
 --- !u!1001 &1809999450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42282,6 +42302,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1930310381}
+    - targetCorrespondingSourceObject: {fileID: 6433870779749738450, guid: 91e287d61f8983846a9d32c8e1c15468,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1930310387}
   m_SourcePrefab: {fileID: 100100000, guid: 91e287d61f8983846a9d32c8e1c15468, type: 3}
 --- !u!1 &1930310378 stripped
 GameObject:
@@ -42347,6 +42371,22 @@ MonoBehaviour:
   _powerState: 0
   ShieldPrefab: {fileID: 745421601}
   playerTransform: {fileID: 1930310380}
+--- !u!114 &1930310387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930310378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8056238f591a3cb43ba0fd330a1a9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  _moveSpeed: 5
+  _rotationSpeed: 600
+  _currentState: 0
 --- !u!1 &1933011532
 GameObject:
   m_ObjectHideFlags: 0

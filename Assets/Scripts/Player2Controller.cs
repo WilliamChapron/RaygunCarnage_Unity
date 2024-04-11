@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Player2Controller : PlayerController
 {
-    Animator animator;
     int isRunningHash;
     PlayerControl input;
     Vector2 currentMovement;
     Vector2 currentAim;
 
 
+    private void Shield()
+    {
+        shieldPower();
+    }
+
+    private void Dash()
+    {
+        dashPower();
+    }
 
     void Awake()
     {
@@ -26,12 +34,16 @@ public class Player2Controller : PlayerController
         {
             currentAim = ctx.ReadValue<Vector2>();
         };
-    }
 
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        isRunningHash = Animator.StringToHash("isRunning");
+        input.Player2Controls.Shield.performed += ctx =>
+        {
+            Shield();
+        };
+
+        input.Player2Controls.Dash.performed += ctx =>
+        {
+            Dash();
+        };
     }
 
     void RotateControl()
@@ -39,33 +51,27 @@ public class Player2Controller : PlayerController
         if (currentAim != Vector2.zero)
         {
             float angle = Mathf.Atan2(currentAim.x, currentAim.y) * Mathf.Rad2Deg;
+            angle += 90f;
             transform.rotation = Quaternion.Euler(0, angle, 0);
         }
     }
 
     void MovementControl()
     {
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool movementPressed = currentMovement.magnitude > 0.1f;
-
-        if (movementPressed && !isRunning)
+        if (_currentState != PlayerState.Shield)
         {
-            animator.SetBool(isRunningHash, true);
+            Vector3 movementDirection = new Vector3(currentMovement.x, 0, currentMovement.y);
+            movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
+            transform.Translate(movementDirection.normalized * Time.deltaTime * _moveSpeed, Space.World);
         }
-
-        if (!movementPressed && !isRunning)
-        {
-            animator.SetBool(isRunningHash, false);
-        }
-
-        Vector3 movementDirection = new Vector3(currentMovement.x, 0, currentMovement.y);
-        transform.Translate(movementDirection * Time.deltaTime * _moveSpeed, Space.World);
     }
 
     void Update()
     {
         MovementControl();
         RotateControl();
+        UpdatePowerState();
+        playerState();
     }
 
     void OnEnable()
