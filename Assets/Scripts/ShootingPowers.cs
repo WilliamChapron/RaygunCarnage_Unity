@@ -24,7 +24,6 @@ public class ShootingPower : MonoBehaviour
         {
             collider.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
         }
-
     }
 }
 
@@ -126,7 +125,7 @@ public class ShootingExplosion : ShootingPower
         }
         else
         {
-            Debug.LogError("Le GameObject instanci� ne contient pas de composant Particle System !");
+            Debug.LogError("Le GameObject instancie ne contient pas de composant Particle System !");
         }
     }
 

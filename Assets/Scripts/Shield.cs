@@ -15,7 +15,7 @@ public class Shield : Power
 
     void Update()
     {
-        if (shieldInstance != null && NoMoreShield(1f))
+        if (shieldInstance != null && NoMoreShield(100f))
         {
             havePower = false;
             DestroyShield();

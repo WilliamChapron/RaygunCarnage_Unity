@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerController;
 
 public class ColliderComponent : MonoBehaviour
 {
@@ -21,7 +22,14 @@ public class ColliderComponent : MonoBehaviour
     {
         if (other.CompareTag("PlayerControllable") && other.gameObject.name != playerName)
         {
-            Debug.Log(name + " a une Collision avec : " + other.gameObject.name);
+            if (other.gameObject.CompareTag("PlayerControllable"))
+            {
+                if (other.gameObject.GetComponent<PlayerController>()._currentState != PlayerState.Shield)
+                {
+                    other.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
+                }
+
+            }
         }
     }
 
