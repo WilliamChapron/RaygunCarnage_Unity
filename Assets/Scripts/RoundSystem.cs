@@ -28,6 +28,12 @@ public class RoundSystem : MonoBehaviour
     public static bool isRoundNeedToChange;
     private bool isGameEnd;
 
+    public static IEnumerator SetRoundChange()
+    {
+        yield return new WaitForSeconds(2f); // Attendre 2 secondes
+        isRoundNeedToChange = true;
+    }
+
     private void Start()
     {
         playerObjects = GameObject.FindGameObjectsWithTag("PlayerControllable");
@@ -47,6 +53,7 @@ public class RoundSystem : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Round change : " + isRoundNeedToChange);
         StartRounds();
         UpdateTimerDisplay();
     }
@@ -61,15 +68,12 @@ public class RoundSystem : MonoBehaviour
 
     private void StartRounds()
     {
-        if (!isGameEnd && currentRound < numberOfRounds)
+        if (isRoundNeedToChange)
         {
             currentRound++;
+            RoundSystem.isRoundNeedToChange = false;
             ResetPlayers();
             StartCoroutine(ManageRound());
-        }
-        else
-        {
-            EndGame();
         }
     }
 
@@ -85,40 +89,37 @@ public class RoundSystem : MonoBehaviour
     {
         ActivateTexts();
         SpawnText2dText();
-        //yield return StartCoroutine(RoundTimer());
         yield return new WaitForSeconds(2f); // Attendre 2 secondes
         DeactivateTexts();
     }
 
-    private IEnumerator RoundTimer()
-    {
-        timer = (int)roundDuration;
-        while (timer > 0)
-        {
-            Timer.GetComponent<TextMeshProUGUI>().text = timer.ToString();
-            yield return new WaitForSeconds(1f);
-            timer--;
+    //private IEnumerator RoundTimer()
+    //{
+    //    timer = (int)roundDuration;
+    //    while (timer > 0)
+    //    {
+    //        Timer.GetComponent<TextMeshProUGUI>().text = timer.ToString();
+    //        yield return new WaitForSeconds(1f);
+    //        timer--;
 
-            if (timer <= 0)
-            {
-                timer = 0;
-                Timer.GetComponent<TextMeshProUGUI>().text = timer.ToString();
+    //        if (timer <= 0)
+    //        {
+    //            timer = 0;
+    //            Timer.GetComponent<TextMeshProUGUI>().text = timer.ToString();
 
-                // Mettre fin au round
-                isRoundNeedToChange = true;
-                break;
-            }
-        }
-    }
+    //            // Mettre fin au round
+    //            isRoundNeedToChange = true;
+    //            break;
+    //        }
+    //    }
+    //}
 
 
-    private IEnumerator SpawnText2dText()
+    private void SpawnText2dText()
     {
         ScoreP1.GetComponent<TextMeshProUGUI>().text = scorePlayer1.ToString();
         ScoreP2.GetComponent<TextMeshProUGUI>().text = scorePlayer2.ToString();
         RoundCount.GetComponent<TextMeshProUGUI>().text = currentRound.ToString();
-
-        yield return new WaitForSeconds(2f);
     }
 
     private void ActivateTexts()

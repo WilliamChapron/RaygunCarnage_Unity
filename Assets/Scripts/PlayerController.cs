@@ -70,7 +70,9 @@ public class PlayerController : MonoBehaviour
                 {
                     //Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
                     animator.CrossFade("Death", 0f);
-                    RoundSystem.isRoundNeedToChange = true;
+                    SetPlayerState(PlayerState.Idle);
+                    StartCoroutine(RoundSystem.SetRoundChange());
+                    
                 }
                 break;
         }
