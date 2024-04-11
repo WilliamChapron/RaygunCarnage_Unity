@@ -27,8 +27,18 @@ public class DashPower : Power
             {
                 tr.emitting = false;
                 havePower = false;
-                PC._moveSpeed /= DashSpeed;
-                hasBeenDestroy=true;
+                Player1Controller Pco = GetComponent<Player1Controller>();
+                if (Pco == null)
+                {
+                    Player2Controller Pct = GetComponent<Player2Controller>();
+                    Pct._moveSpeed /= DashSpeed;
+                }
+                else
+                {
+                    Pco._moveSpeed /= DashSpeed;
+                }
+
+                hasBeenDestroy = true;
             }  
         }
     }
@@ -41,7 +51,17 @@ public class DashPower : Power
             SetPowerState(PowerState.Using);
             powerCreationTime = Time.time;
             havePower = true;
-            PC._moveSpeed *= DashSpeed;
+            Player1Controller Pco = GetComponent<Player1Controller>();
+            if (Pco == null)
+            {
+                Player2Controller Pct = GetComponent<Player2Controller>();
+                Pct._moveSpeed *= DashSpeed;
+            }
+            else
+            {
+                Pco._moveSpeed *= DashSpeed;
+            }
+            
             hasBeenDestroy = false;
         }
     }

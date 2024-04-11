@@ -41,8 +41,8 @@ public class Shooting : MonoBehaviour
         // Shooting Components
         shootingPowers = new List<ShootingPower>();
 
-        //ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
-        //shootingPowers.Add(basicShooting);
+        ShootingBasic basicShooting = gameObject.AddComponent<ShootingBasic>();
+        shootingPowers.Add(basicShooting);
 
         haveAshootingPower = false;
         //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
@@ -51,8 +51,8 @@ public class Shooting : MonoBehaviour
         //ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
         //shootingPowers.Add(explosionShooting);
 
-        ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
-        shootingPowers.Add(crossWallShooting);
+        //ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
+        //shootingPowers.Add(crossWallShooting);
     }
 
     public void Update()
