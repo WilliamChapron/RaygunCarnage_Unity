@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static PlayerController;
 
 public class ShootingPower : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class ShootingPower : MonoBehaviour
 
     public virtual void PerformDamage(Collider collider)
     {
-        PlayerController._currentState = PlayerController.PlayerState.Dead;
+        if (collider.gameObject.CompareTag("PlayerControllable"))
+        {
+            collider.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
+        }
+
     }
 }
 

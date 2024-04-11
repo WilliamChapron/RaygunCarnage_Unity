@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
-    public static PlayerState _currentState;
+    public PlayerState _currentState;
 
     void Start()
     {
@@ -67,7 +67,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Dead:
                 {
-                    
+                    Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
+                    animator.CrossFade("Death", 0f);
+                    RoundSystem.End = true;
                 }
                 break;
         }

@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
         float distance = Vector3.Distance(playerObjects[0].transform.position, playerObjects[1].transform.position);
         float newFOV = distance * 0.3f;
 
-        Debug.Log("FOV : " + newFOV);
+        //Debug.Log("FOV : " + newFOV);
 
         float fovCoefficient = Mathf.Clamp(newFOV / 10f, 0.1f, 1.0f); // Coeff Multiplicator for Distance calcul because it zoom less when it's far, so it's embarassing
 
@@ -101,7 +101,7 @@ public class CameraController : MonoBehaviour
         // Limit caméra positioning in Y
         cameraPosition.y = Mathf.Clamp(cameraPosition.y, basePositionY - 50f, basePositionY + 15f);
 
-        Debug.Log("Camera Y : " + cameraPosition.y);
+        //Debug.Log("Camera Y : " + cameraPosition.y);
 
         transform.position = cameraPosition;
 
