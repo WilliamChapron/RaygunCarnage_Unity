@@ -21,7 +21,7 @@ public class Shield : Power
             DestroyShield();
         }
     }
-
+     
     override public void LunchPower()
     {
         if (_powerState == PowerState.CanBeUse )
