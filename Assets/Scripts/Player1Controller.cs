@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player1Controller : MonoBehaviour
+public class Player1Controller : PlayerController
 {
-    public float speed = 5.0f;
     Animator animator;
     int isRunningHash;
     PlayerControl input;
@@ -60,7 +59,7 @@ public class Player1Controller : MonoBehaviour
         }
 
         Vector3 movementDirection = new Vector3(currentMovement.x, 0, currentMovement.y);
-        transform.Translate(movementDirection * Time.deltaTime * speed, Space.World);
+        transform.Translate(movementDirection * Time.deltaTime * _moveSpeed, Space.World);
     }
 
     void Update()

@@ -164,6 +164,17 @@
                 },
                 {
                     "name": "",
+                    "id": "86f6ad25-357d-4aef-b57d-bbb8e811f2d7",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "17746672-6de5-458d-a5fe-b306588ab6ba",
                     "path": "<DualShockGamepad>/rightShoulder",
                     "interactions": "",
@@ -340,6 +351,17 @@
                     "name": "",
                     "id": "fb6cb857-4aac-4eb7-a73c-0b8fd9b86250",
                     "path": "<SwitchProControllerHID>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shield",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "673162ab-e799-42fc-adbb-759ddb1dd022",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
