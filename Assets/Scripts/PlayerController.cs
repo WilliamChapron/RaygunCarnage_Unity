@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         Running,
         Shield,
         Dash,
+        MiddleDead,
         Dead
     }
 

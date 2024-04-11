@@ -26,6 +26,14 @@ public class ColliderComponent : MonoBehaviour
             {
                 if (other.gameObject.GetComponent<PlayerController>()._currentState != PlayerState.Shield)
                 {
+                    if (GetComponent<Collider>().gameObject.GetComponent<PlayerController>()._currentState == PlayerState.MiddleDead)
+                    {
+                        GetComponent<Collider>().gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
+                    }
+                    else
+                    {
+                        GetComponent<Collider>().gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.MiddleDead);
+                    }
                     other.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
                 }
 

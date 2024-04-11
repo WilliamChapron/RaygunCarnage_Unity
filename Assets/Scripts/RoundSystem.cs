@@ -15,17 +15,18 @@ public class RoundSystem : MonoBehaviour
 
     private int currentRound = 0;
     private float TextOnScreen = 3f;
-    private GameObject Temp1;
-    private GameObject Temp2;
-    private TextMesh TextCounter;
+    private GameObject ScoreP1;
+    private GameObject ScoreP2;
+    private GameObject RoundText;
+    private GameObject RoundCount;
 
     private Vector3 basePosPlayer1;
     private Vector3 basePosPlayer2;
 
     private GameObject[] playerObjects;
 
-    private int scorePlayer1;
-    private int scorePlayer2;
+    public static int scorePlayer1;
+    public static int scorePlayer2;
 
     public static bool isRoundNeedToChange;
     private bool isGameEnd;
@@ -42,11 +43,11 @@ public class RoundSystem : MonoBehaviour
         isRoundNeedToChange = true;
         isGameEnd = false;
 
-        Temp1 = GameObject.Find("Text Round Counter");
-        Temp2 = GameObject.Find("Text Rounds");
-        Temp1.SetActive(false);
-        Temp2.SetActive(false);
-        TextCounter = GameObject.Find("Text Round Counter").GetComponent<TextMesh>();
+        //Temp1 = GameObject.Find("Text Round Counter");
+        //Temp2 = GameObject.Find("Text Rounds");
+        //Temp1.SetActive(false);
+        //Temp2.SetActive(false);
+        //TextCounter = GameObject.Find("Text Round Counter").GetComponent<TextMesh>();
     }
 
     private void Update()
@@ -68,7 +69,7 @@ public class RoundSystem : MonoBehaviour
         {
             currentRound++;
             ResetPlayers();
-            StartCoroutine(SpawnText());
+            //SpawnText2dText();
             StartCoroutine(RoundTimer());
         }
         else
@@ -85,20 +86,14 @@ public class RoundSystem : MonoBehaviour
         playerObjects[0].GetComponent<PlayerController>().SetPlayerState(PlayerState.Idle);
         playerObjects[1].GetComponent<PlayerController>().SetPlayerState(PlayerState.Idle);
     }
-   private IEnumerator SpawnText()
-    {
-        TextCounter.GetComponent<TextMesh>().text = "Round " + currentRound;
-        Debug.Log(currentRound);
-        Temp1.SetActive(true);
-        Temp2.SetActive(true);
-        yield return new WaitForSeconds(TextOnScreen);
-        Temp1.SetActive(false);
-        Temp2.SetActive(false);
-    }
-   private IEnumerator RoundTimer()
+    private IEnumerator RoundTimer()
     {
         yield return new WaitForSeconds(roundDuration);
-        isRoundNeedToChange = true;
+        if (isRoundNeedToChange == false)
+        {
+            isRoundNeedToChange = true;
+        }
+
     }
 
     private void EndGame()
