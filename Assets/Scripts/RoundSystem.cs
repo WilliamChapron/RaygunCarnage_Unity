@@ -20,7 +20,7 @@ public class RoundSystem : MonoBehaviour
     private int scorePlayer1;
     private int scorePlayer2;
 
-    private bool isRoundNeedToChange;
+    public static bool isRoundNeedToChange;
     private bool isGameEnd;
 
     private void Start()
