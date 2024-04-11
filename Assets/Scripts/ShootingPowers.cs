@@ -18,6 +18,7 @@ public class ShootingPower : MonoBehaviour
 
     public virtual void PerformDamage(Collider collider)
     {
+        //Problème Les deux joueurs meurrent
         PlayerController._currentState = PlayerController.PlayerState.Dead;
     }
 }

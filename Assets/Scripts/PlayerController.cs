@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Dead:
                 {
-                    
+                    animator.CrossFade("Death", 0f);
+                    RoundSystem.End = true;
                 }
                 break;
         }
