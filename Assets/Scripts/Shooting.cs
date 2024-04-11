@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using Unity.Burst.CompilerServices;
@@ -272,4 +272,3 @@ public class Shooting : MonoBehaviour
         }
     }
 }
-
