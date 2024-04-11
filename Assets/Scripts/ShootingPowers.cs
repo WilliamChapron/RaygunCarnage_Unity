@@ -18,6 +18,7 @@ public class ShootingPower : MonoBehaviour
 
     public virtual void PerformDamage(Collider collider)
     {
+        PlayerController._currentState = PlayerController.PlayerState.Dead;
     }
 }
 
