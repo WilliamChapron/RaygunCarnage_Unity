@@ -9,7 +9,7 @@ public class Player1Controller : PlayerController
     Vector2 currentMovement;
     Vector2 currentAim;
 
-    
+     
     private void Shield()
     {
         shieldPower();
