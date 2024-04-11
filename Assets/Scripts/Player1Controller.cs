@@ -32,7 +32,7 @@ public class Player1Controller : PlayerController
 
         input.Player1Controls.Movement.performed += ctx =>
         {
-            if (_currentState == PlayerState.Shield) 
+            if (_currentState != PlayerState.Shield) 
             {
                 currentMovement = ctx.ReadValue<Vector2>();
                 SetPlayerState(PlayerState.Running);
