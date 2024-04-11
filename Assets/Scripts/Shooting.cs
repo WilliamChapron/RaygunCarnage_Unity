@@ -117,13 +117,15 @@ public class Shooting : MonoBehaviour
 
     private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
-        //Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
+        Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
+
+
 
         endPoint = hit.point;
 
         Collider collider = hit.collider;
 
-        if (collider != null)
+        if (collider != null && !hit.collider.gameObject.CompareTag("Shield"))
         {
             if (shootingPowers[0].GetType() == typeof(ShootingCrossWall))
             {

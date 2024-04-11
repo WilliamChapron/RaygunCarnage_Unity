@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
         Running,
         Shield,
         Dash,
+        MiddleDead,
         Dead
     }
 
@@ -49,9 +50,13 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool(Animator.StringToHash("isRunning"), true);
                 break;
             case PlayerState.Dead:
-                Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
-                animator.SetBool(Animator.StringToHash("death"), false);
-                RoundSystem.End = true;
+                {
+                    //Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
+                    animator.CrossFade("Death", 0f);
+                    SetPlayerState(PlayerState.Idle);
+                    StartCoroutine(RoundSystem.SetRoundChange());
+                    
+                }
                 break;
         }
     }

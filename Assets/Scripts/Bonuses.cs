@@ -4,115 +4,63 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
+using static UnityEditor.PlayerSettings;
 
 public class Bonuses : MonoBehaviour
 {
-    // Start is called before the first frame update
-    static System.Random random = new System.Random();
-
     public GameObject PowerUpOne;
     public GameObject PowerUpTwo;
     public GameObject PowerUpThree;
 
     public bool PowerUpInCooldown = false;
     public float PowerUpCooldownTime = 10f;
-    public int PowerRandom = 0;
-    public int RandomSpawn = 0;
 
-    Vector3 spot1 = new Vector3(-30, 1, -8);
+    Vector3[] spawnPositions = new Vector3[8];
 
-    Vector3 spot2 = new Vector3(-30, 1, 5);
-
-    Vector3 spot3 = new Vector3(-20, 1, 5);
-
-    Vector3 spot4 = new Vector3(-12, 1, 5);
-
-    Vector3 spot5 = new Vector3(-10, 1, -2);
-
-    Vector3 spot6 = new Vector3(-10, 1, 12);
-
-    Vector3 spot7 = new Vector3(-19, 1, 12);
-
-    Vector3 spot8 = new Vector3(-6, 1, 17);
-
-    private void InCube(GameObject thisPower, Vector3 thisSpot)
+    private void Start()
     {
-        if (thisPower != null)
+        InitializeSpawnPositions();
+        SpawnAllCube();
+    }
+
+    private void InitializeSpawnPositions()
+    {
+        spawnPositions[0] = new Vector3(-30, 1, -8);
+        spawnPositions[1] = new Vector3(-30, 1, 5);
+        spawnPositions[2] = new Vector3(-20, 1, 5);
+        spawnPositions[3] = new Vector3(-12, 1, 5);
+        spawnPositions[4] = new Vector3(-10, 1, -2);
+        spawnPositions[5] = new Vector3(-10, 1, 12);
+        spawnPositions[6] = new Vector3(-19, 1, 12);
+        spawnPositions[7] = new Vector3(-6, 1, 17);
+    }
+
+    private void SpawnAllCube()
+    {
+        StartCoroutine(SpawnCubesWithDelay());
+    }
+
+    private IEnumerator SpawnCubesWithDelay()
+    {
+        foreach (Vector3 pos in spawnPositions)
         {
-            GameObject bonusInstance = Instantiate(thisPower, thisSpot, Quaternion.identity);
+            GameObject powerUpPrefab = null;
+            int powerRandom = Random.Range(0, 3);
+            switch (powerRandom)
+            {
+                case 0:
+                    powerUpPrefab = PowerUpOne;
+                    break;
+                case 1:
+                    powerUpPrefab = PowerUpTwo;
+                    break;
+                case 2:
+                    powerUpPrefab = PowerUpThree;
+                    break;
+            }
+            yield return new WaitForSeconds(1f);
+            GameObject bonusInstance = Instantiate(powerUpPrefab, pos, Quaternion.identity);
             bonusInstance.SetActive(true);
         }
     }
-
-    public void PowerUpSpawn()
-    {
-
-        GameObject powerUpPrefab = null;
-        Vector3 spawnPosition = Vector3.zero;
-
-        switch (PowerRandom)
-        {
-            case 0:
-                powerUpPrefab = PowerUpOne;
-                break;
-            case 1:
-                powerUpPrefab = PowerUpTwo;
-                break;
-            case 2:
-                powerUpPrefab = PowerUpThree;
-                break;
-        }
-
-        switch (RandomSpawn)
-        {
-            case 1:
-                spawnPosition = spot1;
-                break;
-            case 2:
-                spawnPosition = spot2;
-                break;
-            case 3:
-                spawnPosition = spot3;
-                break;
-            case 4:
-                spawnPosition = spot4;
-                break;
-            case 5:
-                spawnPosition = spot5;
-                break;
-            case 6:
-                spawnPosition = spot6;
-                break;
-            case 7:
-                spawnPosition = spot7;
-                break;
-            case 8:
-                spawnPosition = spot8;
-                break;
-
-        }
-
-        InCube(powerUpPrefab, spawnPosition);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (PowerUpInCooldown == false) 
-        { 
-        StartCoroutine(PowerUpCooldownIE());
-        }
-    }
-    private IEnumerator PowerUpCooldownIE()
-    {
-        PowerUpInCooldown = true;
-        yield return new WaitForSeconds(PowerUpCooldownTime);
-        PowerRandom = Random.Range(0, 2);
-        RandomSpawn = Random.Range(1, 8);
-        Debug.Log("Power Random est " + PowerRandom);
-        PowerUpSpawn();
-        PowerUpInCooldown = false;
-        
-    }
 }
-
