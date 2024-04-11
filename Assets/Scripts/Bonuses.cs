@@ -58,7 +58,7 @@ public class Bonuses : MonoBehaviour
                     powerUpPrefab = PowerUpThree;
                     break;
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(6f);
             GameObject bonusInstance = Instantiate(powerUpPrefab, pos, Quaternion.identity);
             bonusInstance.SetActive(true);
         }

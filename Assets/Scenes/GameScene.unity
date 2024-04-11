@@ -45189,7 +45189,7 @@ MonoBehaviour:
   PowerUpTwo: {fileID: 315621663}
   PowerUpThree: {fileID: 198313737}
   PowerUpInCooldown: 0
-  PowerUpCooldownTime: 2
+  PowerUpCooldownTime: 6
 --- !u!4 &2009223271
 Transform:
   m_ObjectHideFlags: 0
