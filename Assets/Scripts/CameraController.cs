@@ -96,7 +96,7 @@ public class CameraController : MonoBehaviour
 
         // Lerp Before set 
         float smoothedYPosition = Mathf.Lerp(transform.position.y, targetYPosition, _moveSpeed * Time.deltaTime);
-        Vector3 cameraPosition = new Vector3(averageLookAt.x - 25f, smoothedYPosition, averageLookAt.z);
+        Vector3 cameraPosition = new Vector3(averageLookAt.x - 17f, smoothedYPosition, averageLookAt.z);
 
         // Limit caméra positioning in Y
         cameraPosition.y = Mathf.Clamp(cameraPosition.y, basePositionY - 50f, basePositionY + 15f);
