@@ -10,6 +10,8 @@ TagManager:
   - PlayerControllable
   - Effect
   - Bonus
+  - Map
+  - Obstacle
   layers:
   - Default
   - TransparentFX

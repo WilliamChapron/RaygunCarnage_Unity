@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using static Power;
-using System.Drawing;
 
 public class Shooting : MonoBehaviour
 {
@@ -45,6 +44,14 @@ public class Shooting : MonoBehaviour
         shootingPowers.Add(basicShooting);
 
         haveAshootingPower = false;
+        //ShootingPush pushShooting = gameObject.AddComponent<ShootingPush>();
+        //shootingPowers.Add(pushShooting);
+
+        //ShootingExplosion explosionShooting = gameObject.AddComponent<ShootingExplosion>();
+        //shootingPowers.Add(explosionShooting);
+
+        //ShootingCrossWall crossWallShooting = gameObject.AddComponent<ShootingCrossWall>();
+        //shootingPowers.Add(crossWallShooting);
     }
 
     public void Update()
@@ -66,6 +73,58 @@ public class Shooting : MonoBehaviour
         }
     }
 
+    void CreateDynamicLight(Vector3 position)
+    {
+        GameObject lightObject = new GameObject("DynamicLight");
+        Light lightComponent = lightObject.AddComponent<Light>();
+
+        lightComponent.type = LightType.Point;
+        lightComponent.color = Color.white;
+        lightComponent.range = 30f;
+        lightComponent.intensity = 30f;
+
+
+        lightObject.transform.position = new Vector3(position.x, position.y, position.z);
+
+        Destroy(lightObject, 2f);
+    }
+
+    private void CreateParticule(Vector3 position)
+    {
+        GameObject particlePrefab = Resources.Load<GameObject>("Particule_05");
+        GameObject particleObject = Instantiate(particlePrefab, position, Quaternion.identity);
+
+        Destroy(particleObject, 2f);
+    }
+
+    private void PerformObjectTouch(RaycastHit hit)
+    {
+        CreateDynamicLight(hit.point);
+        CreateParticule(hit.point);
+        Renderer renderer = hit.collider.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            Material material = renderer.material;
+            Material oldMaterial = new Material(material);
+            material.SetFloat("_Metallic", 0.5f);
+            material.color = Color.black;
+            material.SetFloat("_Glossiness", 0.2f);
+            renderer.material = material;
+
+            StartCoroutine(ResetMaterial(oldMaterial, renderer));
+        }
+    }
+
+    private IEnumerator ResetMaterial(Material material, Renderer renderer)
+    {
+        yield return new WaitForSeconds(2f);
+
+        Debug.Log("Reset le material de l'objet : " + renderer.gameObject.name);
+
+        renderer.material = material;
+    }
+
     private void PerformRaycast(RaycastHit hit, Vector3 startPoint, Vector3 endPoint)
     {
         //Debug.Log("RAYCAST !!!!" + hit.collider.gameObject.name);
@@ -78,9 +137,18 @@ public class Shooting : MonoBehaviour
         {
             if (shootingPowers[0].GetType() == typeof(ShootingCrossWall))
             {
+                if (hit.collider.gameObject.CompareTag("Obstacle"))
+                {
+                    PerformObjectTouch(hit);
+                }
                 RaycastHit[] hits = Physics.RaycastAll(endPoint, transform.forward, 100000000000000000f);
                 foreach (RaycastHit oneHit in hits)
                 {
+                    if (oneHit.collider.gameObject.CompareTag("Obstacle"))
+                    {
+                        PerformObjectTouch(oneHit);
+                    };
+
                     if (oneHit.collider.gameObject.CompareTag("PlayerControllable"))
                     {
                         endPoint = oneHit.point;
