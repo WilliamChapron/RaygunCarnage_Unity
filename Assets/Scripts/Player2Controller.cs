@@ -79,6 +79,11 @@ public class Player2Controller : PlayerController
             Vector3 movementDirection = new Vector3(currentMovement.x, 0, currentMovement.y);
             movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
             transform.Translate(movementDirection.normalized * Time.deltaTime * _moveSpeed, Space.World);
+
+            if (currentMovement.magnitude < 0.1f)
+            {
+                SetPlayerState(PlayerState.Idle);
+            }
         }
 
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    public float _moveSpeed = 50f;
+    public float _moveSpeed = 9f;
     public float _rotationSpeed = 700f;
 
     private List<Power> listOfPower;
