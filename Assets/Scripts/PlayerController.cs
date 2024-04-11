@@ -16,10 +16,11 @@ public class PlayerController : MonoBehaviour
         Idle,
         Running,
         Shield,
-        Dash
+        Dash,
+        Dead
     }
 
-    private PlayerState _currentState;
+    public static PlayerState _currentState;
 
     void Start()
     {
@@ -64,10 +65,15 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 break;
+            case PlayerState.Dead:
+                {
+                    
+                }
+                break;
         }
     }
 
-    private void SetPlayerState(PlayerState newState)
+    public void SetPlayerState(PlayerState newState)
     {
         _currentState = newState;
     }
