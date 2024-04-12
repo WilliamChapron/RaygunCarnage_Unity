@@ -43348,7 +43348,7 @@ PrefabInstance:
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
       propertyPath: haveshoot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7267969653596437602, guid: 91e287d61f8983846a9d32c8e1c15468,
         type: 3}
@@ -43481,7 +43481,7 @@ MonoBehaviour:
   animator: {fileID: 1930310391}
   _moveSpeed: 9
   _rotationSpeed: 600
-  _currentState: 0
+  _currentState: 5
 --- !u!95 &1930310391 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 351930697372542738, guid: 91e287d61f8983846a9d32c8e1c15468,

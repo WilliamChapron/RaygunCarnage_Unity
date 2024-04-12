@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public float _moveSpeed = 9f;
     public float _rotationSpeed = 700f;
+    public bool middledead;
 
     private List<Power> listOfPower;
     
@@ -16,7 +17,6 @@ public class PlayerController : MonoBehaviour
         Running,
         Shield,
         Dash,
-        MiddleDead,
         Dead
     }
 
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         listOfPower.Add(shield);
         DashPower dash = GetComponent<DashPower>();
         listOfPower.Add(dash);
+        middledead = false;
     }
 
     public void playerState()

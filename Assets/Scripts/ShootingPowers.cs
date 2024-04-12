@@ -22,13 +22,40 @@ public class ShootingPower : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("PlayerControllable"))
         {
-            if (collider.gameObject.GetComponent<PlayerController>()._currentState == PlayerState.MiddleDead)
+            Player1Controller Pco = collider.gameObject.GetComponent<Player1Controller>();
+            if (Pco == null)
             {
-                collider.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
+                Player2Controller Pct = collider.gameObject.GetComponent<Player2Controller>();
+                
+                if (Pct._currentState != PlayerState.Shield)
+                {
+                    
+                    if (Pct.middledead == true)
+                    {
+                        Pct.SetPlayerState(PlayerState.Dead);
+                        Debug.Log(Pct._currentState);
+                    }
+                    else
+                    {
+                        Pct.middledead = true;
+                    }
+                }
+
             }
             else
             {
-                collider.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.MiddleDead);
+                if (Pco._currentState != PlayerState.Shield)
+                {
+                    
+                    if (Pco.middledead == true)
+                    {
+                        Pco.SetPlayerState(PlayerState.Dead);
+                    }
+                    else
+                    {
+                        Pco.middledead = true;
+                    }
+                }
             }
 
         }

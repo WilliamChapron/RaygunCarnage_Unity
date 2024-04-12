@@ -20,23 +20,42 @@ public class ColliderComponent : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("test");
         if (other.CompareTag("PlayerControllable") && other.gameObject.name != playerName)
         {
             if (other.gameObject.CompareTag("PlayerControllable"))
             {
-                if (other.gameObject.GetComponent<PlayerController>()._currentState != PlayerState.Shield)
+                Player1Controller Pco = other.gameObject.GetComponent<Player1Controller>();
+                if (Pco == null)
                 {
-                    if (GetComponent<Collider>().gameObject.GetComponent<PlayerController>()._currentState == PlayerState.MiddleDead)
-                    {
-                        GetComponent<Collider>().gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
+                    Player2Controller Pct = other.gameObject.GetComponent<Player2Controller>();
+                    if(Pct._currentState != PlayerState.Shield) 
+                    { 
+                        if(Pct.middledead == true)
+                        {
+                            Pct.SetPlayerState(PlayerState.Dead);
+                        }
+                        else
+                        {
+                            Pct.middledead = true;
+                        }
                     }
-                    else
-                    {
-                        GetComponent<Collider>().gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.MiddleDead);
-                    }
-                    other.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
+                    
                 }
-
+                else
+                {
+                    if (Pco._currentState != PlayerState.Shield)
+                    {
+                        if (Pco.middledead == true)
+                        {
+                            Pco.SetPlayerState(PlayerState.Dead);
+                        }
+                        else
+                        {
+                            Pco.middledead = true;
+                        }
+                    }
+                }
             }
         }
     }
