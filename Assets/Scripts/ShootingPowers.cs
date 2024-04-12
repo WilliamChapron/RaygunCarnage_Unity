@@ -24,6 +24,7 @@ public class ShootingPower : MonoBehaviour
         {
             if (collider.gameObject.GetComponent<PlayerController>()._currentState == PlayerState.MiddleDead)
             {
+                StartCoroutine(RoundSystem.SetRoundChange(collider.gameObject));
                 collider.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
             }
             else

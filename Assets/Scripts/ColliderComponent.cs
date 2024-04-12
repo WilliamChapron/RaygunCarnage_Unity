@@ -34,7 +34,6 @@ public class ColliderComponent : MonoBehaviour
                     {
                         GetComponent<Collider>().gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.MiddleDead);
                     }
-                    other.gameObject.GetComponent<PlayerController>().SetPlayerState(PlayerState.Dead);
                 }
 
             }

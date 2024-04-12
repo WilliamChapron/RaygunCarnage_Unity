@@ -28,11 +28,20 @@ public class RoundSystem : MonoBehaviour
     public static bool isRoundNeedToChange;
     private bool isGameEnd;
 
-    public static IEnumerator SetRoundChange()
+    public static IEnumerator SetRoundChange(GameObject player)
     {
-        yield return new WaitForSeconds(2f); // Attendre 2 secondes
+        yield return new WaitForSeconds(3f); 
+        if (player.name == "Player1")
+        {
+            scorePlayer1 += 10;
+        }
+        if (player.name == "Player2")
+        {
+            scorePlayer2 += 10;
+        }
         isRoundNeedToChange = true;
     }
+
 
     private void Start()
     {
