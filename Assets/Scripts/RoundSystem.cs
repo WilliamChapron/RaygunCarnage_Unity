@@ -100,19 +100,19 @@ public class RoundSystem : MonoBehaviour
         {
             Player2Controller Pct = playerObjects[0].gameObject.GetComponent<Player2Controller>();
             Pct.SetPlayerState(PlayerState.Idle);
+            Pct.middledead = false;
+            Player1Controller Pcot = playerObjects[1].gameObject.GetComponent<Player1Controller>();
+            Pcot.SetPlayerState(PlayerState.Idle);
+            Pcot.middledead = false;
         }
         else
         {
-            Player1Controller Pcot = playerObjects[1].gameObject.GetComponent<Player1Controller>();
-            if (Pcot == null)
-            {
-                Player2Controller Pctt = playerObjects[1].gameObject.GetComponent<Player2Controller>();
-                Pctt.SetPlayerState(PlayerState.Idle);
-            }
-            else
-            {
-                Pcot.SetPlayerState(PlayerState.Idle);
-            }
+           Pco.SetPlayerState(PlayerState.Idle);
+           Pco.middledead = false;  
+           Player2Controller Pctt = playerObjects[1].gameObject.GetComponent<Player2Controller>();
+           Pctt.SetPlayerState(PlayerState.Idle);
+           Pctt .middledead = false;
+   
         }
     }
 

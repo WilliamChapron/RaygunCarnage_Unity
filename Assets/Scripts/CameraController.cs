@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class CameraController : MonoBehaviour
 {

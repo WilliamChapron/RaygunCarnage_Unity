@@ -47,7 +47,7 @@ public class ColliderComponent : MonoBehaviour
 
                             lightObject.transform.position = other.gameObject.transform.position;
 
-                            Destroy(lightObject, 1f);
+                            Destroy(lightObject, 0.5f);
                         }
                     }
                     
@@ -72,7 +72,7 @@ public class ColliderComponent : MonoBehaviour
 
                             lightObject.transform.position = other.gameObject.transform.position;
 
-                            Destroy(lightObject, 1f);
+                            Destroy(lightObject, 0.5f);
                         }
                     }
                 }

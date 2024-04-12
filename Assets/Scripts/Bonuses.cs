@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
-using static UnityEditor.PlayerSettings;
 
 public class Bonuses : MonoBehaviour
 {

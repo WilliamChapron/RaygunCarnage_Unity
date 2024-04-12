@@ -32,7 +32,7 @@ public class Player1Controller : PlayerController
 
         input.Player1Controls.Movement.performed += ctx =>
         {
-            if (_currentState != PlayerState.Shield) 
+            if (_currentState != PlayerState.Shield && _currentState != PlayerState.Dead) 
             {
                 currentMovement = ctx.ReadValue<Vector2>();
                 SetPlayerState(PlayerState.Running);
@@ -41,24 +41,36 @@ public class Player1Controller : PlayerController
 
         input.Player1Controls.Aim.performed += ctx =>
         {
-            currentAim = ctx.ReadValue<Vector2>();
+            if (_currentState != PlayerState.Dead)
+            {
+                currentAim = ctx.ReadValue<Vector2>();
+            }
         };
 
         input.Player1Controls.Shield.performed += ctx =>
         {
-             Shield();
-             SetPlayerState(PlayerState.Shield);
+            if (_currentState != PlayerState.Dead)
+            {
+                Shield();
+                SetPlayerState(PlayerState.Shield);
+            }
         };
 
         input.Player1Controls.Dash.performed += ctx =>
         {
-            Dash();
-            SetPlayerState(PlayerState.Dash);
+            if (_currentState != PlayerState.Dead)
+            {
+                Dash();
+                SetPlayerState(PlayerState.Dash);
+            }
         };
 
         input.Player1Controls.Shoot.performed += ctx =>
         {
-            shoot();
+            if (_currentState != PlayerState.Dead)
+            {
+                shoot();
+            }
         };
     }
 

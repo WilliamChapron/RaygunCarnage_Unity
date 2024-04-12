@@ -18,6 +18,11 @@ public class LoadingScene : MonoBehaviour
         StartCoroutine(LoadSceneAsnc(sceneId));
     }
 
+    public void Leave()
+    {
+        Application.Quit();
+    }
+
     IEnumerator LoadSceneAsnc(int sceneId)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);

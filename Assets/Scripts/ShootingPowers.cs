@@ -47,7 +47,7 @@ public class ShootingPower : MonoBehaviour
 
                         lightObject.transform.position = collider.gameObject.transform.position;
 
-                        Destroy(lightObject, 1f);
+                        Destroy(lightObject, 0.5f);
                     }
                 }
 
@@ -73,7 +73,7 @@ public class ShootingPower : MonoBehaviour
 
                         lightObject.transform.position = collider.gameObject.transform.position;
 
-                        Destroy(lightObject, 1f);
+                        Destroy(lightObject, 0.5f);
                     }
                 }
             }
