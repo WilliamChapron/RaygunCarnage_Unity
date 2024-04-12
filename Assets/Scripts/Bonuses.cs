@@ -37,6 +37,7 @@ public class Bonuses : MonoBehaviour
 
     public void SpawnAllCube()
     {
+        allCube = new List<GameObject>();
         StartCoroutine(SpawnCubesWithDelay());
     }
 
@@ -46,6 +47,7 @@ public class Bonuses : MonoBehaviour
        {
             allCube[i].GetComponent<BonusCube>().Destroyme();
        }
+        allCube.Clear();
     }
 
     private IEnumerator SpawnCubesWithDelay()

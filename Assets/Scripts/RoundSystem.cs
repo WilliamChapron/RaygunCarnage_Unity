@@ -33,6 +33,7 @@ public class RoundSystem : MonoBehaviour
 
     public static IEnumerator SetRoundChange(GameObject player)
     {
+        Debug.Log("Rs");
         yield return new WaitForSeconds(3f); 
         if (player.name == "Player1")
         {
@@ -65,7 +66,7 @@ public class RoundSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Round change : " + isRoundNeedToChange);
+        //Debug.Log("Round change : " + isRoundNeedToChange);
         StartRounds();
         UpdateTimerDisplay();
     }
@@ -83,10 +84,10 @@ public class RoundSystem : MonoBehaviour
         if (isRoundNeedToChange)
         {
             currentRound++;
-            RoundSystem.isRoundNeedToChange = false;
             ResetPlayers();
             ResetPower();
             StartCoroutine(ManageRound());
+            isRoundNeedToChange = false;
         }
     }
 

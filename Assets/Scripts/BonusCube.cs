@@ -9,11 +9,11 @@ public class BonusCube : MonoBehaviour
     {
        Shooting myShoot = player.GetComponent<Shooting>();
        myShoot.addPower(index);
-       Destroy(gameObject);
+       Destroy(this.gameObject);
     }
 
     public void Destroyme()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
