@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool middledead;
 
     private List<Power> listOfPower;
-    
+
     public enum PlayerState
     {
         Idle,
@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         SetPlayerState(PlayerState.Idle);
-        animator.SetBool(Animator.StringToHash("isRunning"), false);
         listOfPower = new List<Power>();
         Shield shield = GetComponent<Shield>();
         listOfPower.Add(shield);
@@ -39,26 +38,21 @@ public class PlayerController : MonoBehaviour
         switch (_currentState)
         {
             case PlayerState.Idle:
-                animator.SetBool(Animator.StringToHash("isRunning"), false);
+                animator.CrossFade("Idle", 0f);
                 break;
             case PlayerState.Running:
-                animator.SetBool(Animator.StringToHash("isRunning"), true);
+                animator.CrossFade("Fight", 0f);
                 break;
             case PlayerState.Shield:
-                animator.SetBool(Animator.StringToHash("isRunning"), false);
+                animator.CrossFade("Idle", 0f);
                 break;
             case PlayerState.Dash:
-                animator.SetBool(Animator.StringToHash("isRunning"), true);
+                animator.CrossFade("Fight", 0f);
                 break;
             case PlayerState.Dead:
-                {
-                    //Debug.Log("Un joueur est mort" + "C'est le joueur " + gameObject.name);
-                    animator.CrossFade("Death", 0f);
-                    SetPlayerState(PlayerState.Idle);
-                    StartCoroutine(RoundSystem.SetRoundChange());
-                    
-                }
+                animator.CrossFade("Death", 0f);
                 break;
+
         }
     }
 

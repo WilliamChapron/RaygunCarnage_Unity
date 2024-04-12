@@ -32,6 +32,7 @@ public class ShootingPower : MonoBehaviour
                     
                     if (Pct.middledead == true)
                     {
+                        StartCoroutine(RoundSystem.SetRoundChange(collider.gameObject));
                         Pct.SetPlayerState(PlayerState.Dead);
                         Debug.Log(Pct._currentState);
                     }
@@ -49,6 +50,7 @@ public class ShootingPower : MonoBehaviour
                     
                     if (Pco.middledead == true)
                     {
+                        StartCoroutine(RoundSystem.SetRoundChange(collider.gameObject));
                         Pco.SetPlayerState(PlayerState.Dead);
                     }
                     else

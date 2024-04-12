@@ -74,7 +74,7 @@ public class Player1Controller : PlayerController
 
     void MovementControl()
     {
-        if (_currentState != PlayerState.Shield) 
+        if (_currentState != PlayerState.Shield && _currentState != PlayerState.Dead) 
         {
             Vector3 movementDirection = new Vector3(currentMovement.x, 0, currentMovement.y);
             movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
@@ -90,10 +90,11 @@ public class Player1Controller : PlayerController
 
     void Update()
     {
+        playerState();
         MovementControl();
         RotateControl();
         UpdatePowerState();
-        playerState();
+        
     }
 
     void OnEnable()

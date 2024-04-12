@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using static PlayerController;
 
 public class RoundSystem : MonoBehaviour
 {
@@ -28,11 +29,20 @@ public class RoundSystem : MonoBehaviour
     public static bool isRoundNeedToChange;
     private bool isGameEnd;
 
-    public static IEnumerator SetRoundChange()
+    public static IEnumerator SetRoundChange(GameObject player)
     {
-        yield return new WaitForSeconds(2f); // Attendre 2 secondes
+        yield return new WaitForSeconds(3f); 
+        if (player.name == "Player1")
+        {
+            scorePlayer1 += 10;
+        }
+        if (player.name == "Player2")
+        {
+            scorePlayer2 += 10;
+        }
         isRoundNeedToChange = true;
     }
+
 
     private void Start()
     {
@@ -79,10 +89,28 @@ public class RoundSystem : MonoBehaviour
 
     private void ResetPlayers()
     {
+       
         playerObjects[0].transform.position = basePosPlayer1;
         playerObjects[1].transform.position = basePosPlayer2;
-        playerObjects[0].GetComponent<PlayerController>().SetPlayerState(PlayerController.PlayerState.Idle);
-        playerObjects[1].GetComponent<PlayerController>().SetPlayerState(PlayerController.PlayerState.Idle);
+        Player1Controller Pco = playerObjects[0].gameObject.GetComponent<Player1Controller>();
+        if (Pco == null)
+        {
+            Player2Controller Pct = playerObjects[0].gameObject.GetComponent<Player2Controller>();
+            Pct.SetPlayerState(PlayerState.Idle);
+        }
+        else
+        {
+            Player1Controller Pcot = playerObjects[1].gameObject.GetComponent<Player1Controller>();
+            if (Pcot == null)
+            {
+                Player2Controller Pctt = playerObjects[1].gameObject.GetComponent<Player2Controller>();
+                Pctt.SetPlayerState(PlayerState.Idle);
+            }
+            else
+            {
+                Pcot.SetPlayerState(PlayerState.Idle);
+            }
+        }
     }
 
     private IEnumerator ManageRound()
