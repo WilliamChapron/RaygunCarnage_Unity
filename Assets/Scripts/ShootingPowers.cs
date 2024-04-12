@@ -39,6 +39,15 @@ public class ShootingPower : MonoBehaviour
                     else
                     {
                         Pct.middledead = true;
+                        GameObject lightObject = new GameObject("BrightLight");
+
+                        Light lightComponent = lightObject.AddComponent<Light>();
+                        lightComponent.color = Color.red;
+                        lightComponent.intensity = 50f;
+
+                        lightObject.transform.position = collider.gameObject.transform.position;
+
+                        Destroy(lightObject, 1f);
                     }
                 }
 
@@ -56,6 +65,15 @@ public class ShootingPower : MonoBehaviour
                     else
                     {
                         Pco.middledead = true;
+                        GameObject lightObject = new GameObject("BrightLight");
+
+                        Light lightComponent = lightObject.AddComponent<Light>();
+                        lightComponent.color = Color.red;
+                        lightComponent.intensity = 50f;
+
+                        lightObject.transform.position = collider.gameObject.transform.position;
+
+                        Destroy(lightObject, 1f);
                     }
                 }
             }

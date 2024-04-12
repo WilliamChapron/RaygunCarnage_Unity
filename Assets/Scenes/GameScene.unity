@@ -8472,6 +8472,7 @@ MonoBehaviour:
   RoundText: {fileID: 167816310}
   RoundCount: {fileID: 305416905}
   Timer: {fileID: 1611450259}
+  bonusSystem: {fileID: 2009223269}
 --- !u!1 &379746067 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1839786891944690, guid: c96016c34e7be62488e588470988ef5b,
@@ -45191,7 +45192,7 @@ MonoBehaviour:
   PowerUpTwo: {fileID: 315621663}
   PowerUpThree: {fileID: 198313737}
   PowerUpInCooldown: 0
-  PowerUpCooldownTime: 6
+  allCube: []
 --- !u!4 &2009223271
 Transform:
   m_ObjectHideFlags: 0

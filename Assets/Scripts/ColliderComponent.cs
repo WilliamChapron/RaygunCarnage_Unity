@@ -39,6 +39,15 @@ public class ColliderComponent : MonoBehaviour
                         else
                         {
                             Pct.middledead = true;
+                            GameObject lightObject = new GameObject("BrightLight");
+
+                            Light lightComponent = lightObject.AddComponent<Light>();
+                            lightComponent.color = Color.red;
+                            lightComponent.intensity = 50f;
+
+                            lightObject.transform.position = other.gameObject.transform.position;
+
+                            Destroy(lightObject, 1f);
                         }
                     }
                     
@@ -55,6 +64,15 @@ public class ColliderComponent : MonoBehaviour
                         else
                         {
                             Pco.middledead = true;
+                            GameObject lightObject = new GameObject("BrightLight");
+
+                            Light lightComponent = lightObject.AddComponent<Light>();
+                            lightComponent.color = Color.red;
+                            lightComponent.intensity = 50f;
+
+                            lightObject.transform.position = other.gameObject.transform.position;
+
+                            Destroy(lightObject, 1f);
                         }
                     }
                 }

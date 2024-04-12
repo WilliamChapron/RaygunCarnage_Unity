@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.VFX;
@@ -13,8 +14,8 @@ public class Bonuses : MonoBehaviour
     public GameObject PowerUpThree;
 
     public bool PowerUpInCooldown = false;
-    public float PowerUpCooldownTime = 10f;
 
+    public List<GameObject> allCube;
     Vector3[] spawnPositions = new Vector3[8];
 
     private void Start()
@@ -35,9 +36,17 @@ public class Bonuses : MonoBehaviour
         spawnPositions[7] = new Vector3(-6, 1, 17);
     }
 
-    private void SpawnAllCube()
+    public void SpawnAllCube()
     {
         StartCoroutine(SpawnCubesWithDelay());
+    }
+
+    public void destroyAll()
+    {
+       for (int i = 0; i < allCube.Count; i++)
+       {
+            allCube[i].GetComponent<BonusCube>().Destroyme();
+       }
     }
 
     private IEnumerator SpawnCubesWithDelay()
@@ -58,8 +67,9 @@ public class Bonuses : MonoBehaviour
                     powerUpPrefab = PowerUpThree;
                     break;
             }
-            yield return new WaitForSeconds(6f);
+            yield return new WaitForSeconds(3f);
             GameObject bonusInstance = Instantiate(powerUpPrefab, pos, Quaternion.identity);
+            allCube.Add(bonusInstance);
             bonusInstance.SetActive(true);
         }
     }

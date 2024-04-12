@@ -29,6 +29,8 @@ public class RoundSystem : MonoBehaviour
     public static bool isRoundNeedToChange;
     private bool isGameEnd;
 
+    public GameObject bonusSystem;
+
     public static IEnumerator SetRoundChange(GameObject player)
     {
         yield return new WaitForSeconds(3f); 
@@ -83,6 +85,7 @@ public class RoundSystem : MonoBehaviour
             currentRound++;
             RoundSystem.isRoundNeedToChange = false;
             ResetPlayers();
+            ResetPower();
             StartCoroutine(ManageRound());
         }
     }
@@ -111,6 +114,13 @@ public class RoundSystem : MonoBehaviour
                 Pcot.SetPlayerState(PlayerState.Idle);
             }
         }
+    }
+
+    private void ResetPower()
+    {
+        Bonuses theBonus = bonusSystem.GetComponent<Bonuses>();
+        theBonus.destroyAll();
+        theBonus.SpawnAllCube();
     }
 
     private IEnumerator ManageRound()
