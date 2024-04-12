@@ -33,7 +33,7 @@ public class ColliderComponent : MonoBehaviour
                     { 
                         if(Pct.middledead == true)
                         {
-                            StartCoroutine(RoundSystem.SetRoundChange(other.gameObject));
+                            StartCoroutine(RoundSystem.SetRoundChange(Pct.gameObject));
                             Pct.SetPlayerState(PlayerState.Dead);
                         }
                         else
@@ -58,7 +58,7 @@ public class ColliderComponent : MonoBehaviour
                     {
                         if (Pco.middledead == true)
                         {
-                            StartCoroutine(RoundSystem.SetRoundChange(other.gameObject));
+                            StartCoroutine(RoundSystem.SetRoundChange(Pco.gameObject));
                             Pco.SetPlayerState(PlayerState.Dead);
                         }
                         else
